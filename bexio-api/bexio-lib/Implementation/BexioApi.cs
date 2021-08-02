@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace bexio_lib.Implementation
 {
-    public abstract class BexioJwtAuthApi : IBexioApi
+    public class BexioApi : IBexioApi
     {
         public string ENDPOINT { get; init; }
         public RestClient CLIENT { get; init; }
 
-        public BexioJwtAuthApi(string apiEndpoint, string apiKey)
+        public BexioApi(string apiEndpoint, string apiKey)
         {
             this.ENDPOINT = apiEndpoint;
 

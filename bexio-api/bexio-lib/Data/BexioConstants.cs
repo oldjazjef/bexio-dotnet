@@ -70,4 +70,31 @@ namespace bexio_lib.Data
         public const string OFFSET = "offset";
         public const string ORDER_BY = "order_by";
     }
+
+
+    public static class BexioCountryFilterFields
+    {
+        public const string name = "name";
+        public const string name_short = "name_short";
+    }
+
+    public static class BexioCurrencyFilterFields
+    {
+        public const string name = "name";
+    }
+
+    public static class BexioInvoiceFilterFields
+    {
+        public const string id = "id";
+        public const string document_nr = "document_nr";
+        public const string api_reference = "api_reference";
+        public const string kb_item_status_id = "kb_item_status_id";
+    }
+
+    public static class BexioItemFilterFields
+    {
+        public const string id = "id";
+        public const string intern_code = "intern_code";
+        public const string intern_name = "intern_name";
+    }
 }

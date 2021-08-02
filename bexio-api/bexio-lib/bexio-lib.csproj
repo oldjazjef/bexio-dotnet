@@ -5,4 +5,9 @@
     <RootNamespace>bexio_lib</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RestClient" Version="3.446.20952" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+  </ItemGroup>
+
 </Project>
