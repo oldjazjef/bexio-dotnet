@@ -1,4 +1,4 @@
-﻿using RestSharp;
+﻿using bexio_lib.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace bexio_lib.Interfaces
 {
-    public interface IBexioApi
+    public interface IBexioApiOrderEndpoint : IBexioApiFullEndpoint<BexioOrder>
     {
-        string API_URL { get; init; }
-        RestClient CLIENT { get; init; }
     }
 }

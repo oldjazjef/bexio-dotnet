@@ -97,4 +97,11 @@ namespace bexio_lib.Data
         public const string intern_code = "intern_code";
         public const string intern_name = "intern_name";
     }
+
+    public static class BexioOrderFilterFields
+    {
+        public const string kb_item_status_id = "kb_item_status_id";
+        public const string title = "title";
+        public const string document_nr = "document_nr";
+    }
 }

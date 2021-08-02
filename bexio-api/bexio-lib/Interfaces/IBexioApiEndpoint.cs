@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bexio_lib.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,15 @@ namespace bexio_lib.Interfaces
 {
     public interface IBexioApiEndpoint
     {
-        public string ENDPOINT { get; init; }
-        public IBexioApi API { get; init; }
+        string ENDPOINT { get; init; }
+        IBexioApi API { get; init; }
+    }
+
+    public interface IBexioApiFullEndpoint<TEntity> : IBexioApiEndpoint
+    {
+        TEntity GetById(int id);
+        ICollection<TEntity> GetAll(BexioRequestFilter requestParameter = null);
+        ICollection<TEntity> Search(BexioRequestFilter requestParameter = null);
+
     }
 }
