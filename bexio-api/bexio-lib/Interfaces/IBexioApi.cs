@@ -9,7 +9,7 @@ namespace bexio_lib.Interfaces
 {
     public interface IBexioApi
     {
-        public string ENDPOINT { get; init; }
+        public string API_URL { get; init; }
         public RestClient CLIENT { get; init; }
     }
 }

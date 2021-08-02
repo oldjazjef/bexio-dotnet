@@ -11,15 +11,15 @@ namespace bexio_lib.Implementation
 {
     public class BexioApi : IBexioApi
     {
-        public string ENDPOINT { get; init; }
+        public string API_URL { get; init; }
         public RestClient CLIENT { get; init; }
 
         public BexioApi(string apiEndpoint, string apiKey)
         {
-            this.ENDPOINT = apiEndpoint;
+            this.API_URL = apiEndpoint;
 
             // setup endpoint
-            this.CLIENT = new RestClient(this.ENDPOINT);
+            this.CLIENT = new RestClient(this.API_URL);
             this.CLIENT.Authenticator = new JwtAuthenticator(apiKey);
             this.CLIENT.AddDefaultHeader("Accept", "application/json");
         }

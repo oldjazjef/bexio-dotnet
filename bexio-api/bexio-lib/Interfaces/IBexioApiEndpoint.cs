@@ -8,6 +8,7 @@ namespace bexio_lib.Interfaces
 {
     public interface IBexioApiEndpoint
     {
-        IBexioApi API { get; init; }
+        public string ENDPOINT { get; init; }
+        public IBexioApi API { get; init; }
     }
 }
