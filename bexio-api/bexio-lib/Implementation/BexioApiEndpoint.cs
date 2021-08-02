@@ -42,7 +42,7 @@ namespace bexio_lib.Implementation
             var request = new RestRequest(this.ENDPOINT, DataFormat.Json)
                 .AddRequestData(requestParameter);
 
-            var result = this.API.CLIENT.Get(request)
+            var result = this.API.Get(request)
                 .DeserializeRequestResult<ICollection<TEntity>>();
 
             return result;
@@ -58,7 +58,7 @@ namespace bexio_lib.Implementation
         {
             var request = new RestRequest($"{this.ENDPOINT}/{id}", DataFormat.Json);
 
-            var result = this.API.CLIENT.Get(request)
+            var result = this.API.Get(request)
                 .DeserializeRequestResult<TEntity>();
 
             return result;
@@ -75,7 +75,7 @@ namespace bexio_lib.Implementation
             var request = new RestRequest($"{this.ENDPOINT}/search", DataFormat.Json)
                 .AddRequestData(requestParameter);
 
-            var result = this.API.CLIENT.Post(request)
+            var result = this.API.Post(request)
                 .DeserializeRequestResult<ICollection<TEntity>>();
 
             return result;

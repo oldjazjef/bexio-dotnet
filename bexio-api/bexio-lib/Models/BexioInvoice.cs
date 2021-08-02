@@ -50,4 +50,12 @@ namespace bexio_lib.Models
         public ICollection<BexioPosition> positions { get; set; }
     }
 
+    public class BexioInvoiceSend
+    {
+        public string recipient_email { get; set; }
+        public string subject { get; set; }
+        public string message { get; set; }
+        public bool mark_as_open { get; set; }
+    }
+
 }

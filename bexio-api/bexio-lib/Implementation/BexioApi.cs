@@ -16,6 +16,12 @@ namespace bexio_lib.Implementation
 
         public BexioApi() { }
 
+        /// <summary>
+        /// Creates api object containing RestClient setup using JWT auth method
+        /// </summary>
+        /// <param name="apiUrl"></param>
+        /// <param name="apiKey"></param>
+        /// <returns></returns>
         public static BexioApi UseJwt(string apiUrl, string apiKey)
         {
             var client = new RestClient(apiUrl);
@@ -28,6 +34,28 @@ namespace bexio_lib.Implementation
                 CLIENT = client
             };
             
+        }
+
+        /// <summary>
+        /// Wrapper for posting data to api
+        /// This wrapper handles results and exceptions
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public IRestResponse Post(RestRequest request)
+        {
+            return this.CLIENT.Post(request);
+        }
+
+        /// <summary>
+        /// Wrapper for posting data to api
+        /// This wrapper handles results and exceptions
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public IRestResponse Get(RestRequest request)
+        {
+            return this.CLIENT.Get(request);
         }
     }
 }
