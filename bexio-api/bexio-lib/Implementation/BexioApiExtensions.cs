@@ -1,4 +1,8 @@
-﻿using bexio_lib.Models;
+﻿using bexio_lib.Implementation.Endpoints;
+using bexio_lib.Interfaces;
+using bexio_lib.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -11,6 +15,18 @@ namespace bexio_lib.Implementation
 {
     public static class BexioApiExtensions
     {
+        public static IServiceCollection UseJwt(this IServiceCollection services, IConfiguration configuration)
+        {
+    
+            var bexioApi = BexioApi.UseJwt(
+                configuration["apiUrl"],
+                configuration["apiKey"]);
+
+            services.AddSingleton<IBexioApi>(bexioApi);
+            services.AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>();
+
+            return services;
+        }
 
         /// <summary>
         /// Extension method to add bexio specific query params and json body parameters to the api request

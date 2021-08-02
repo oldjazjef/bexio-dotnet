@@ -34,13 +34,7 @@ namespace BexioLibTest
 
         public void ConfigureServices(IServiceCollection services, HostBuilderContext context)
         {
-
-            var bexioApi = BexioApi.UseJwt(
-                context.Configuration["apiUrl"],
-                context.Configuration["apiKey"]);
-
-            services.AddSingleton<IBexioApi>(bexioApi);
-            services.AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>();
+            services.UseJwt(context.Configuration);
         }
     }
 }
