@@ -3,6 +3,11 @@
 netcore 5 Bexio-Api library.
 Implements some of the Bexio-Api endpoints, models and offers some extensions
 
+Currently offering:
+- Fetching, Searching, GetById
+- Models for some bexio entities
+- Constants for some bexio entities
+
 ## Usage
 
 TODO: Write usage instructions
