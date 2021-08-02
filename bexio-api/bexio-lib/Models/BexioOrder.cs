@@ -66,16 +66,22 @@ namespace bexio_lib.Models
         public float amount { get; set; }
     }
 
-    public class BexioOrderDeliveryCreate
-    {
-        public ICollection<BexioOrderDeliveryPosition> positions { get; set; }
-    }
-
     public class BexioOrderInvoicePosition
     {
         public int id { get; set; }
         public string type { get; set; }
         public float amount { get; set; }
+    }
+
+
+    public class BexioOrderInvoiceUpdate
+    {
+        public ICollection<BexioOrderInvoicePosition> positions { get; set; }
+    }
+
+    public class BexioOrderDeliveryUpdate
+    {
+        public ICollection<BexioOrderDeliveryPosition> positions { get; set; }
     }
 
 }

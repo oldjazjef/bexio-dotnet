@@ -11,5 +11,9 @@ namespace bexio_lib.Interfaces
     {
         string API_URL { get; init; }
         RestClient CLIENT { get; init; }
+
+        IRestResponse Post(RestRequest request);
+
+        IRestResponse Get(RestRequest request);
     }
 }

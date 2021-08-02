@@ -23,7 +23,14 @@ namespace bexio_lib.Implementation
                 configuration["apiKey"]);
 
             services.AddSingleton<IBexioApi>(bexioApi);
-            services.AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>();
+            services
+                .AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>()
+                .AddTransient<IBexioApiArticleEndpoint, BexioApiArticleEndpoint>()
+                .AddTransient<IBexioApiContactEndpoint, BexioApiContactEndpoint>()
+                .AddTransient<IBexioApiCountryEndpoint, BexioApiCountryEndpoint>()
+                .AddTransient<IBexioApiCurrencyEndpoint, BexioApiCurrencyEndpoint>()
+                .AddTransient<IBexioApiDeliveryEndpoint, BexioApiDeliveryEndpoint>()
+                .AddTransient<IBexioApiInvoiceEndpoint, BexioApiInvoiceEndpoint>();
 
             return services;
         }
