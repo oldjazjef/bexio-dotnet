@@ -14,14 +14,20 @@ namespace bexio_lib.Implementation
         public string API_URL { get; init; }
         public RestClient CLIENT { get; init; }
 
-        public BexioApi(string apiEndpoint, string apiKey)
-        {
-            this.API_URL = apiEndpoint;
+        public BexioApi() { }
 
-            // setup endpoint
-            this.CLIENT = new RestClient(this.API_URL);
-            this.CLIENT.Authenticator = new JwtAuthenticator(apiKey);
-            this.CLIENT.AddDefaultHeader("Accept", "application/json");
+        public static BexioApi UseJwt(string apiUrl, string apiKey)
+        {
+            var client = new RestClient(apiUrl);
+            client.Authenticator = new JwtAuthenticator(apiKey);
+            client.AddDefaultHeader("Accept", "application/json");
+
+            return new BexioApi
+            {
+                API_URL = apiUrl,
+                CLIENT = client
+            };
+            
         }
     }
 }
