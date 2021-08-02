@@ -8,14 +8,14 @@
 
   <ItemGroup>
     <None Remove="apisecrets.json" />
-    <None Remove="appsettings.json" />
+    <None Remove="apisettings.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="apisecrets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="appsettings.json">
+    <Content Include="apisettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

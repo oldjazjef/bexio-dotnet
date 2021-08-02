@@ -26,8 +26,8 @@ namespace BexioLibTest
                 .ConfigureAppConfiguration((context, builder) => {
                     builder
                     .SetBasePath(context.HostingEnvironment.ContentRootPath)
-                    .AddJsonFile("appsettings.json", false, false)
-                    .AddJsonFile("apisecrets.json", false, false)
+                    .AddJsonFile("apisettings.json", true, false)
+                    .AddJsonFile("apisecrets.json", true, false)
                     .AddEnvironmentVariables()
                     .Build();
                 });
