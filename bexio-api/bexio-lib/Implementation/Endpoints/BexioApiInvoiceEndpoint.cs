@@ -11,7 +11,7 @@ namespace bexio_lib.Implementation.Endpoints
 {
     public class BexioApiInvoiceEndpoint : BexioApiFullEndpoint<BexioInvoice>, IBexioApiInvoiceEndpoint
     {
-        public BexioApiInvoiceEndpoint(IBexioApi api): base(api, "lb_invoice")
+        public BexioApiInvoiceEndpoint(IBexioApi api): base(api, "kb_invoice")
         {
 
         }
