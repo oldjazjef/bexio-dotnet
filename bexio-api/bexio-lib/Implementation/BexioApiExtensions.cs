@@ -15,14 +15,21 @@ namespace bexio_lib.Implementation
 {
     public static class BexioApiExtensions
     {
-        public static IServiceCollection UseJwt(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBexioJwt(this IServiceCollection services, IConfiguration configuration)
         {
     
             var bexioApi = BexioApi.UseJwt(
-                configuration["apiUrl"],
-                configuration["apiKey"]);
+                configuration["bexioApiUrl"],
+                configuration["bexioApiKey"]);
 
             services.AddSingleton<IBexioApi>(bexioApi);
+            services.AddBexioEndpoints();
+
+            return services;
+        }
+
+        public static IServiceCollection AddBexioEndpoints(this IServiceCollection services)
+        {
             services
                 .AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>()
                 .AddTransient<IBexioApiArticleEndpoint, BexioApiArticleEndpoint>()
