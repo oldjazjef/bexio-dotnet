@@ -3,7 +3,7 @@
 
 This repository contains a dotnet / dotnet core compatible Bexio client.
 
-Supports **bexio API v2.0 and v3.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
+Supports **bexio API v2.0, v3.0 and v4.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
 All endpoints offer sync and async (`...Async`) methods, targets .NET 8.
 
 #### API 2.0 (`bexio_lib.Interfaces`)
@@ -20,8 +20,14 @@ All endpoints offer sync and async (`...Async`) methods, targets .NET 8.
 - Banking: bank accounts
 - Files: list, upload, download, delete
 
+#### API 4.0 (`bexio_lib.Interfaces.V4`)
+- Purchase bills, expenses, outgoing payments
+- Payroll employees and absences
+
+(uuid string ids, edit via PUT)
+
 Entities with write access (`IBexioApiCrudEndpoint`) support `Create`, `Update` and `Delete`; all others `GetById`, `GetAll` and `Search`.
-Resources not covered yet (e.g. api 4.0 purchase / payroll) can be added by deriving from `BexioApiCrudEndpoint<T>` / `BexioApiFullEndpoint<T>` with the matching `BexioApiVersion`.
+Resources not covered yet can be added by deriving from `BexioApiCrudEndpoint<T>` / `BexioApiFullEndpoint<T>` with the matching `BexioApiVersion`.
 
 If you find something missing or broken, please [report an issue][github-issue] or even better fork the repo and submit a pull request
 
