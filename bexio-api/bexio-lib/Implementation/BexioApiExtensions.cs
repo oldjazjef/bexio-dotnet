@@ -1,15 +1,11 @@
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 
 namespace bexio_lib.Implementation
 {
@@ -21,43 +17,9 @@ namespace bexio_lib.Implementation
         };
 
         /// <summary>
-        /// Registers the api and all endpoints. Reads "bexioApiUrl" (optional) and "bexioApiKey" from the configuration.
-        /// </summary>
-        public static IServiceCollection AddBexioJwt(this IServiceCollection services, IConfiguration configuration)
-        {
-            var bexioApi = BexioApi.UseJwt(
-                configuration["bexioApiUrl"],
-                configuration["bexioApiKey"]);
-
-            services.AddSingleton<IBexioApi>(bexioApi);
-            services.AddBexioEndpoints();
-
-            return services;
-        }
-
-        /// <summary>
-        /// Registers every endpoint (v2 and v3) of this assembly under its interface, e.g.
-        /// IBexioApiInvoiceEndpoint -> BexioApiInvoiceEndpoint
-        /// </summary>
-        public static IServiceCollection AddBexioEndpoints(this IServiceCollection services)
-        {
-            var assembly = typeof(BexioApiExtensions).Assembly;
-            foreach (var implementation in assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract && typeof(IBexioApiEndpoint).IsAssignableFrom(t)))
-            {
-                var service = implementation.GetInterfaces()
-                    .FirstOrDefault(i => i.Name == "I" + implementation.Name && i.Assembly == assembly);
-                if (service != null)
-                {
-                    services.AddTransient(service, implementation);
-                }
-            }
-            return services;
-        }
-
-        /// <summary>
         /// Adds limit / offset / order_by query parameters
         /// </summary>
-        public static RestRequest AddRequestData(this RestRequest request, BexioRequestFilter requestParameters)
+        public static BexioRequest AddRequestData(this BexioRequest request, BexioRequestFilter requestParameters)
         {
             if (requestParameters != null)
             {
@@ -82,7 +44,7 @@ namespace bexio_lib.Implementation
         /// <summary>
         /// Adds query parameters and the filter instructions as json body (search endpoints)
         /// </summary>
-        public static RestRequest AddSearchData(this RestRequest request, BexioRequestFilter requestParameters)
+        public static BexioRequest AddSearchData(this BexioRequest request, BexioRequestFilter requestParameters)
         {
             request.AddRequestData(requestParameters);
             return request.AddRequestBodyData((object)(requestParameters?.Filters ?? new List<BexioRequestFilterInstruction>()));
@@ -91,19 +53,18 @@ namespace bexio_lib.Implementation
         /// <summary>
         /// Adds data as json to bexio request body. Null properties are omitted.
         /// </summary>
-        public static RestRequest AddRequestBodyData(this RestRequest request, object body)
+        public static BexioRequest AddRequestBodyData(this BexioRequest request, object body)
         {
-            request.AddParameter("application/json", JsonConvert.SerializeObject(body, SerializerSettings), ParameterType.RequestBody);
-            return request;
+            return request.AddJsonBody(JsonConvert.SerializeObject(body, SerializerSettings));
         }
 
-        private static bool IsSuccess(IRestResponse response)
+        private static bool IsSuccess(BexioResponse response)
             => (int)response.StatusCode >= 200 && (int)response.StatusCode < 300;
 
         /// <summary>
         /// Throws a <see cref="BexioApiException"/> if the response is not a 2xx
         /// </summary>
-        public static IRestResponse EnsureSuccess(this IRestResponse response)
+        public static BexioResponse EnsureSuccess(this BexioResponse response)
         {
             if (!IsSuccess(response))
             {
@@ -113,7 +74,7 @@ namespace bexio_lib.Implementation
             return response;
         }
 
-        public static T DeserializeRequestResult<T>(this IRestResponse response)
+        public static T DeserializeRequestResult<T>(this BexioResponse response)
         {
             response.EnsureSuccess();
             if (string.IsNullOrWhiteSpace(response.Content))
@@ -126,7 +87,7 @@ namespace bexio_lib.Implementation
         /// <summary>
         /// Delete answers either with 204, or 200 and {"success": true}
         /// </summary>
-        public static bool ToDeleteResult(this IRestResponse response)
+        public static bool ToDeleteResult(this BexioResponse response)
         {
             response.EnsureSuccess();
             if (string.IsNullOrWhiteSpace(response.Content))

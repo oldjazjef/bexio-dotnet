@@ -6,7 +6,8 @@ using bexio_lib.Implementation.Endpoints.V4;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
 using Microsoft.Extensions.DependencyInjection;
-using RestSharp;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace BexioLibTest.Unit
             this._api.Content = "[]";
             new BexioApiContactEndpoint(this._api).GetAll();
             Assert.Equal("2.0/contact", this._api.Resource);
-            Assert.Equal(Method.GET, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Get, this._api.LastMethod);
         }
 
         [Fact]
@@ -46,7 +47,7 @@ namespace BexioLibTest.Unit
             bills.GetById("abc-1");
             Assert.Equal("4.0/purchase/bills/abc-1", this._api.Resource);
             bills.Update("abc-1", new BexioBill { title = "x" });
-            Assert.Equal(Method.PUT, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Put, this._api.LastMethod);
             new BexioApiEmployeeEndpoint(this._api).GetById("e1");
             Assert.Equal("4.0/payroll/employees/e1", this._api.Resource);
         }
@@ -68,7 +69,7 @@ namespace BexioLibTest.Unit
             var filter = new BexioRequestFilter().Add(new BexioRequestFilterInstruction(BexioInvoiceFilterFields.kb_item_status_id, "9,16", BexioFilterCriteria.IN));
             new BexioApiInvoiceEndpoint(this._api).Search(filter);
             Assert.Equal("2.0/kb_invoice/search", this._api.Resource);
-            Assert.Equal(Method.POST, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Post, this._api.LastMethod);
             Assert.Equal("[{\"field\":\"kb_item_status_id\",\"value\":\"9,16\",\"criteria\":\"in\"}]", this._api.Body);
         }
 
@@ -86,7 +87,7 @@ namespace BexioLibTest.Unit
             this._api.Content = "{\"id\":5}";
             var result = new BexioApiContactEndpoint(this._api).Create(new BexioContact { name_1 = "Muster", contact_type_id = 1 });
             Assert.Equal(5, result.id);
-            Assert.Equal(Method.POST, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Post, this._api.LastMethod);
             Assert.DoesNotContain("null", this._api.Body);
             Assert.Contains("\"name_1\":\"Muster\"", this._api.Body);
         }
@@ -96,11 +97,11 @@ namespace BexioLibTest.Unit
         {
             new BexioApiContactEndpoint(this._api).Update(7, new BexioContact { name_1 = "x" });
             Assert.Equal("2.0/contact/7", this._api.Resource);
-            Assert.Equal(Method.POST, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Post, this._api.LastMethod);
 
             new BexioApiCurrencyV3Endpoint(this._api).Update(7, new BexioCurrency { name = "CHF" });
             Assert.Equal("3.0/currencies/7", this._api.Resource);
-            Assert.Equal(Method.PUT, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Put, this._api.LastMethod);
         }
 
         [Theory]
@@ -112,7 +113,7 @@ namespace BexioLibTest.Unit
             this._api.StatusCode = code;
             this._api.Content = content;
             Assert.Equal(expected, new BexioApiContactEndpoint(this._api).Delete(3));
-            Assert.Equal(Method.DELETE, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Delete, this._api.LastMethod);
             Assert.Equal("2.0/contact/3", this._api.Resource);
         }
 
@@ -183,19 +184,24 @@ namespace BexioLibTest.Unit
         }
 
         [Fact]
-        public void Request_builds_to_correct_absolute_uri()
+        public void Client_groups_endpoints_by_version()
         {
-            var api = BexioApi.UseJwt("https://api.bexio.com/2.0", "token");
-            var uri = api.CLIENT.BuildUri(new RestRequest("3.0/accounting/calendar_years", DataFormat.Json));
-            Assert.Equal("https://api.bexio.com/3.0/accounting/calendar_years", uri.ToString());
+            var client = new BexioClient(this._api);
+            this._api.Content = "[]";
+            client.V2.Contacts.GetAll();
+            Assert.Equal("2.0/contact", this._api.Resource);
+            client.V3.Currencies.GetAll();
+            Assert.Equal("3.0/currencies", this._api.Resource);
+            client.V4.Bills.GetAll();
+            Assert.Equal("4.0/purchase/bills", this._api.Resource);
+            Assert.Same(client.V2.Contacts, client.V2.Contacts);
         }
 
         [Fact]
         public void All_endpoints_are_registered_in_di()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IBexioApi>(this._api);
-            services.AddBexioEndpoints();
+            services.AddBexio(o => o.AccessToken = "t");
             var provider = services.BuildServiceProvider();
 
             var endpointInterfaces = typeof(IBexioApi).Assembly.GetTypes()
@@ -204,6 +210,8 @@ namespace BexioLibTest.Unit
             {
                 Assert.NotNull(provider.GetService(i));
             }
+            Assert.NotNull(provider.GetService<IBexioClient>());
+            Assert.NotNull(provider.GetService<IBexioClientFactory>());
         }
     }
 }

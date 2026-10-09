@@ -1,6 +1,6 @@
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using RestSharp;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,23 +21,23 @@ namespace bexio_lib.Implementation
             this.ENDPOINT = $"{version}/{endpoint}";
         }
 
-        protected RestRequest NewRequest(string suffix = null)
+        protected BexioRequest NewRequest(string suffix = null)
         {
             var resource = string.IsNullOrEmpty(suffix) ? this.ENDPOINT : $"{this.ENDPOINT}/{suffix}";
-            return new RestRequest(resource, DataFormat.Json);
+            return new BexioRequest(resource);
         }
 
-        protected T Send<T>(RestRequest request, Method method)
-            => this.API.Execute(request, method).DeserializeRequestResult<T>();
+        protected T Send<T>(BexioRequest request, HttpMethod method)
+            => this.API.Send(request, method).DeserializeRequestResult<T>();
 
-        protected async Task<T> SendAsync<T>(RestRequest request, Method method, CancellationToken ct)
-            => (await this.API.ExecuteAsync(request, method, ct).ConfigureAwait(false)).DeserializeRequestResult<T>();
+        protected async Task<T> SendAsync<T>(BexioRequest request, HttpMethod method, CancellationToken ct)
+            => (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).DeserializeRequestResult<T>();
 
-        protected void Send(RestRequest request, Method method)
-            => this.API.Execute(request, method).EnsureSuccess();
+        protected void Send(BexioRequest request, HttpMethod method)
+            => this.API.Send(request, method).EnsureSuccess();
 
-        protected async Task SendAsync(RestRequest request, Method method, CancellationToken ct)
-            => (await this.API.ExecuteAsync(request, method, ct).ConfigureAwait(false)).EnsureSuccess();
+        protected async Task SendAsync(BexioRequest request, HttpMethod method, CancellationToken ct)
+            => (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).EnsureSuccess();
     }
 
     public abstract class BexioApiFullEndpoint<TEntity> : BexioApiEndpoint, IBexioApiFullEndpoint<TEntity>
@@ -49,22 +49,22 @@ namespace bexio_lib.Implementation
         #region DEFAULTS
 
         public ICollection<TEntity> GetAll(BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), Method.GET);
+            => this.Send<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get);
 
         public TEntity GetById(int id)
-            => this.Send<TEntity>(this.NewRequest(id.ToString()), Method.GET);
+            => this.Send<TEntity>(this.NewRequest(id.ToString()), HttpMethod.Get);
 
         public ICollection<TEntity> Search(BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), Method.POST);
+            => this.Send<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), HttpMethod.Post);
 
         public Task<ICollection<TEntity>> GetAllAsync(BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), Method.GET, cancellationToken);
+            => this.SendAsync<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get, cancellationToken);
 
         public Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken = default)
-            => this.SendAsync<TEntity>(this.NewRequest(id.ToString()), Method.GET, cancellationToken);
+            => this.SendAsync<TEntity>(this.NewRequest(id.ToString()), HttpMethod.Get, cancellationToken);
 
         public Task<ICollection<TEntity>> SearchAsync(BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), Method.POST, cancellationToken);
+            => this.SendAsync<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), HttpMethod.Post, cancellationToken);
 
         #endregion
     }
@@ -78,24 +78,24 @@ namespace bexio_lib.Implementation
         /// <summary>
         /// Http method used to edit an entity. Bexio 2.0 edits with POST, 3.0 uses PUT.
         /// </summary>
-        protected virtual Method UpdateMethod => Method.POST;
+        protected virtual HttpMethod UpdateMethod => HttpMethod.Post;
 
         public TEntity Create(TEntity entity)
-            => this.Send<TEntity>(this.NewRequest().AddRequestBodyData(entity), Method.POST);
+            => this.Send<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post);
 
         public TEntity Update(int id, TEntity entity)
             => this.Send<TEntity>(this.NewRequest(id.ToString()).AddRequestBodyData(entity), this.UpdateMethod);
 
         public bool Delete(int id)
-            => this.API.Execute(this.NewRequest(id.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.NewRequest(id.ToString()), HttpMethod.Delete).ToDeleteResult();
 
         public Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
-            => this.SendAsync<TEntity>(this.NewRequest().AddRequestBodyData(entity), Method.POST, cancellationToken);
+            => this.SendAsync<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post, cancellationToken);
 
         public Task<TEntity> UpdateAsync(int id, TEntity entity, CancellationToken cancellationToken = default)
             => this.SendAsync<TEntity>(this.NewRequest(id.ToString()).AddRequestBodyData(entity), this.UpdateMethod, cancellationToken);
 
         public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
-            => (await this.API.ExecuteAsync(this.NewRequest(id.ToString()), Method.DELETE, cancellationToken).ConfigureAwait(false)).ToDeleteResult();
+            => (await this.API.SendAsync(this.NewRequest(id.ToString()), HttpMethod.Delete, cancellationToken).ConfigureAwait(false)).ToDeleteResult();
     }
 }

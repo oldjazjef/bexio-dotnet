@@ -2,7 +2,7 @@ using bexio_lib.Data;
 using bexio_lib.Interfaces.V4;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using RestSharp;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,27 +17,27 @@ namespace bexio_lib.Implementation.Endpoints.V4
         protected BexioApiV4Endpoint(IBexioApi api, string endpoint) : base(api, BexioApiVersion.V4, endpoint) { }
 
         public ICollection<TEntity> GetAll(BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), Method.GET);
+            => this.Send<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get);
 
-        public TEntity GetById(string id) => this.Send<TEntity>(this.NewRequest(id), Method.GET);
+        public TEntity GetById(string id) => this.Send<TEntity>(this.NewRequest(id), HttpMethod.Get);
 
         public TEntity Create(TEntity entity)
-            => this.Send<TEntity>(this.NewRequest().AddRequestBodyData(entity), Method.POST);
+            => this.Send<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post);
 
         public TEntity Update(string id, TEntity entity)
-            => this.Send<TEntity>(this.NewRequest(id).AddRequestBodyData(entity), Method.PUT);
+            => this.Send<TEntity>(this.NewRequest(id).AddRequestBodyData(entity), HttpMethod.Put);
 
         public bool Delete(string id)
-            => this.API.Execute(this.NewRequest(id), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.NewRequest(id), HttpMethod.Delete).ToDeleteResult();
 
         public Task<ICollection<TEntity>> GetAllAsync(BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), Method.GET, cancellationToken);
+            => this.SendAsync<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get, cancellationToken);
 
         public Task<TEntity> GetByIdAsync(string id, CancellationToken cancellationToken = default)
-            => this.SendAsync<TEntity>(this.NewRequest(id), Method.GET, cancellationToken);
+            => this.SendAsync<TEntity>(this.NewRequest(id), HttpMethod.Get, cancellationToken);
 
         public Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
-            => this.SendAsync<TEntity>(this.NewRequest().AddRequestBodyData(entity), Method.POST, cancellationToken);
+            => this.SendAsync<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post, cancellationToken);
     }
 
     public class BexioApiBillEndpoint : BexioApiV4Endpoint<BexioBill>, IBexioApiBillEndpoint

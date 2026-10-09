@@ -2,7 +2,7 @@ using bexio_lib.Data;
 using bexio_lib.Interfaces;
 using bexio_lib.Interfaces.V3;
 using bexio_lib.Models;
-using RestSharp;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace bexio_lib.Implementation.Endpoints.V3
     {
         protected BexioApiV3CrudEndpoint(IBexioApi api, string endpoint) : base(api, BexioApiVersion.V3, endpoint) { }
 
-        protected override Method UpdateMethod => Method.PUT;
+        protected override HttpMethod UpdateMethod => HttpMethod.Put;
     }
 
     public class BexioApiCurrencyV3Endpoint : BexioApiV3CrudEndpoint<BexioCurrency>, IBexioApiCurrencyV3Endpoint
@@ -24,7 +24,7 @@ namespace bexio_lib.Implementation.Endpoints.V3
         public BexioApiCurrencyV3Endpoint(IBexioApi api) : base(api, "currencies") { }
 
         public ICollection<BexioExchangeRate> GetExchangeRates(int currencyId)
-            => this.Send<ICollection<BexioExchangeRate>>(this.NewRequest($"{currencyId}/exchange_rates"), Method.GET);
+            => this.Send<ICollection<BexioExchangeRate>>(this.NewRequest($"{currencyId}/exchange_rates"), HttpMethod.Get);
     }
 
     public class BexioApiTaxEndpoint : BexioApiFullEndpoint<BexioTax>, IBexioApiTaxEndpoint
@@ -32,14 +32,14 @@ namespace bexio_lib.Implementation.Endpoints.V3
         public BexioApiTaxEndpoint(IBexioApi api) : base(api, BexioApiVersion.V3, "taxes") { }
 
         public bool Delete(int id)
-            => this.API.Execute(this.NewRequest(id.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.NewRequest(id.ToString()), HttpMethod.Delete).ToDeleteResult();
     }
 
     public class BexioApiUserV3Endpoint : BexioApiFullEndpoint<BexioUser>, IBexioApiUserV3Endpoint
     {
         public BexioApiUserV3Endpoint(IBexioApi api) : base(api, BexioApiVersion.V3, "users") { }
 
-        public BexioUser GetMe() => this.Send<BexioUser>(this.NewRequest("me"), Method.GET);
+        public BexioUser GetMe() => this.Send<BexioUser>(this.NewRequest("me"), HttpMethod.Get);
     }
 
     public class BexioApiCalendarYearEndpoint : BexioApiFullEndpoint<BexioCalendarYear>, IBexioApiCalendarYearEndpoint
@@ -47,7 +47,7 @@ namespace bexio_lib.Implementation.Endpoints.V3
         public BexioApiCalendarYearEndpoint(IBexioApi api) : base(api, BexioApiVersion.V3, "accounting/calendar_years") { }
 
         public BexioCalendarYear Create(BexioCalendarYear year)
-            => this.Send<BexioCalendarYear>(this.NewRequest().AddRequestBodyData(year), Method.POST);
+            => this.Send<BexioCalendarYear>(this.NewRequest().AddRequestBodyData(year), HttpMethod.Post);
     }
 
     public class BexioApiBusinessYearEndpoint : BexioApiFullEndpoint<BexioBusinessYear>, IBexioApiBusinessYearEndpoint
@@ -65,14 +65,14 @@ namespace bexio_lib.Implementation.Endpoints.V3
         public BexioApiManualEntryEndpoint(IBexioApi api) : base(api, "accounting/manual_entries") { }
 
         public string GetNextReferenceNumber()
-            => this.Send<BexioNextReferenceNumber>(this.NewRequest("next_ref_nr"), Method.GET)?.next_ref_nr;
+            => this.Send<BexioNextReferenceNumber>(this.NewRequest("next_ref_nr"), HttpMethod.Get)?.next_ref_nr;
     }
 
     public class BexioApiJournalEndpoint : BexioApiEndpoint, IBexioApiJournalEndpoint
     {
         public BexioApiJournalEndpoint(IBexioApi api) : base(api, BexioApiVersion.V3, "accounting/journal") { }
 
-        private RestRequest Req(string from, string to, BexioRequestFilter requestParameter)
+        private BexioRequest Req(string from, string to, BexioRequestFilter requestParameter)
         {
             var request = this.NewRequest().AddRequestData(requestParameter);
             if (!string.IsNullOrEmpty(from))
@@ -87,10 +87,10 @@ namespace bexio_lib.Implementation.Endpoints.V3
         }
 
         public ICollection<BexioJournalEntry> GetAll(string from = null, string to = null, BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<BexioJournalEntry>>(this.Req(from, to, requestParameter), Method.GET);
+            => this.Send<ICollection<BexioJournalEntry>>(this.Req(from, to, requestParameter), HttpMethod.Get);
 
         public Task<ICollection<BexioJournalEntry>> GetAllAsync(string from = null, string to = null, BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<BexioJournalEntry>>(this.Req(from, to, requestParameter), Method.GET, cancellationToken);
+            => this.SendAsync<ICollection<BexioJournalEntry>>(this.Req(from, to, requestParameter), HttpMethod.Get, cancellationToken);
     }
 
     public class BexioApiBankAccountEndpoint : BexioApiFullEndpoint<BexioBankAccount>, IBexioApiBankAccountEndpoint
@@ -102,40 +102,39 @@ namespace bexio_lib.Implementation.Endpoints.V3
     {
         public BexioApiFileEndpoint(IBexioApi api) : base(api, BexioApiVersion.V3, "files") { }
 
-        private RestRequest UploadRequest(string fileName, byte[] content)
+        private BexioRequest UploadRequest(string fileName, byte[] content)
         {
             var request = this.NewRequest();
-            request.AlwaysMultipartFormData = true;
-            request.AddFile("file", content, fileName);
+            request.AddFile("file", fileName, content);
             return request;
         }
 
         public BexioFile Upload(string fileName, byte[] content)
         {
-            var files = this.Send<ICollection<BexioFile>>(this.UploadRequest(fileName, content), Method.POST);
+            var files = this.Send<ICollection<BexioFile>>(this.UploadRequest(fileName, content), HttpMethod.Post);
             return files == null ? null : System.Linq.Enumerable.FirstOrDefault(files);
         }
 
         public async Task<BexioFile> UploadAsync(string fileName, byte[] content, CancellationToken cancellationToken = default)
         {
-            var files = await this.SendAsync<ICollection<BexioFile>>(this.UploadRequest(fileName, content), Method.POST, cancellationToken).ConfigureAwait(false);
+            var files = await this.SendAsync<ICollection<BexioFile>>(this.UploadRequest(fileName, content), HttpMethod.Post, cancellationToken).ConfigureAwait(false);
             return files == null ? null : System.Linq.Enumerable.FirstOrDefault(files);
         }
 
-        private RestRequest DownloadRequest(int fileId)
+        private BexioRequest DownloadRequest(int fileId)
         {
             var request = this.NewRequest($"{fileId}/download");
-            request.AddHeader("Accept", "*/*");
+            request.Accept = "*/*";
             return request;
         }
 
         public byte[] Download(int fileId)
-            => this.API.Execute(this.DownloadRequest(fileId), Method.GET).EnsureSuccess().RawBytes;
+            => this.API.Send(this.DownloadRequest(fileId), HttpMethod.Get).EnsureSuccess().RawBytes;
 
         public async Task<byte[]> DownloadAsync(int fileId, CancellationToken cancellationToken = default)
-            => (await this.API.ExecuteAsync(this.DownloadRequest(fileId), Method.GET, cancellationToken).ConfigureAwait(false)).EnsureSuccess().RawBytes;
+            => (await this.API.SendAsync(this.DownloadRequest(fileId), HttpMethod.Get, cancellationToken).ConfigureAwait(false)).EnsureSuccess().RawBytes;
 
         public bool Delete(int fileId)
-            => this.API.Execute(this.NewRequest(fileId.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.NewRequest(fileId.ToString()), HttpMethod.Delete).ToDeleteResult();
     }
 }

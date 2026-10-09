@@ -1,7 +1,7 @@
 using bexio_lib.Data;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using RestSharp;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,33 +12,33 @@ namespace bexio_lib.Implementation.Endpoints
     {
         public BexioApiInvoicePaymentEndpoint(IBexioApi api) : base(api, BexioApiVersion.V2, "kb_invoice") { }
 
-        private RestRequest Req(int invoiceId, string suffix = null)
+        private BexioRequest Req(int invoiceId, string suffix = null)
             => this.NewRequest(suffix == null ? $"{invoiceId}/payment" : $"{invoiceId}/payment/{suffix}");
 
         public ICollection<BexioInvoicePayment> GetAll(int invoiceId)
-            => this.Send<ICollection<BexioInvoicePayment>>(this.Req(invoiceId), Method.GET);
+            => this.Send<ICollection<BexioInvoicePayment>>(this.Req(invoiceId), HttpMethod.Get);
 
         public BexioInvoicePayment GetById(int invoiceId, int paymentId)
-            => this.Send<BexioInvoicePayment>(this.Req(invoiceId, paymentId.ToString()), Method.GET);
+            => this.Send<BexioInvoicePayment>(this.Req(invoiceId, paymentId.ToString()), HttpMethod.Get);
 
         public BexioInvoicePayment Create(int invoiceId, BexioInvoicePayment payment)
-            => this.Send<BexioInvoicePayment>(this.Req(invoiceId).AddRequestBodyData(payment), Method.POST);
+            => this.Send<BexioInvoicePayment>(this.Req(invoiceId).AddRequestBodyData(payment), HttpMethod.Post);
 
         public bool Delete(int invoiceId, int paymentId)
-            => this.API.Execute(this.Req(invoiceId, paymentId.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.Req(invoiceId, paymentId.ToString()), HttpMethod.Delete).ToDeleteResult();
 
         public Task<ICollection<BexioInvoicePayment>> GetAllAsync(int invoiceId, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<BexioInvoicePayment>>(this.Req(invoiceId), Method.GET, cancellationToken);
+            => this.SendAsync<ICollection<BexioInvoicePayment>>(this.Req(invoiceId), HttpMethod.Get, cancellationToken);
 
         public Task<BexioInvoicePayment> CreateAsync(int invoiceId, BexioInvoicePayment payment, CancellationToken cancellationToken = default)
-            => this.SendAsync<BexioInvoicePayment>(this.Req(invoiceId).AddRequestBodyData(payment), Method.POST, cancellationToken);
+            => this.SendAsync<BexioInvoicePayment>(this.Req(invoiceId).AddRequestBodyData(payment), HttpMethod.Post, cancellationToken);
     }
 
     public abstract class BexioApiPositionEndpoint : BexioApiEndpoint, IBexioApiPositionEndpoint
     {
         protected BexioApiPositionEndpoint(IBexioApi api, string documentEndpoint) : base(api, BexioApiVersion.V2, documentEndpoint) { }
 
-        private RestRequest Req(int documentId, string positionType, string suffix = null)
+        private BexioRequest Req(int documentId, string positionType, string suffix = null)
             => this.NewRequest(suffix == null ? $"{documentId}/{ToSegment(positionType)}" : $"{documentId}/{ToSegment(positionType)}/{suffix}");
 
         /// <summary>
@@ -60,25 +60,25 @@ namespace bexio_lib.Implementation.Endpoints
         }
 
         public ICollection<BexioPosition> GetAll(int documentId, string positionType, BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<BexioPosition>>(this.Req(documentId, positionType).AddRequestData(requestParameter), Method.GET);
+            => this.Send<ICollection<BexioPosition>>(this.Req(documentId, positionType).AddRequestData(requestParameter), HttpMethod.Get);
 
         public BexioPosition GetById(int documentId, string positionType, int positionId)
-            => this.Send<BexioPosition>(this.Req(documentId, positionType, positionId.ToString()), Method.GET);
+            => this.Send<BexioPosition>(this.Req(documentId, positionType, positionId.ToString()), HttpMethod.Get);
 
         public BexioPosition Create(int documentId, string positionType, BexioPosition position)
-            => this.Send<BexioPosition>(this.Req(documentId, positionType).AddRequestBodyData(position), Method.POST);
+            => this.Send<BexioPosition>(this.Req(documentId, positionType).AddRequestBodyData(position), HttpMethod.Post);
 
         public BexioPosition Update(int documentId, string positionType, int positionId, BexioPosition position)
-            => this.Send<BexioPosition>(this.Req(documentId, positionType, positionId.ToString()).AddRequestBodyData(position), Method.POST);
+            => this.Send<BexioPosition>(this.Req(documentId, positionType, positionId.ToString()).AddRequestBodyData(position), HttpMethod.Post);
 
         public bool Delete(int documentId, string positionType, int positionId)
-            => this.API.Execute(this.Req(documentId, positionType, positionId.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.Req(documentId, positionType, positionId.ToString()), HttpMethod.Delete).ToDeleteResult();
 
         public Task<ICollection<BexioPosition>> GetAllAsync(int documentId, string positionType, BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
-            => this.SendAsync<ICollection<BexioPosition>>(this.Req(documentId, positionType).AddRequestData(requestParameter), Method.GET, cancellationToken);
+            => this.SendAsync<ICollection<BexioPosition>>(this.Req(documentId, positionType).AddRequestData(requestParameter), HttpMethod.Get, cancellationToken);
 
         public Task<BexioPosition> CreateAsync(int documentId, string positionType, BexioPosition position, CancellationToken cancellationToken = default)
-            => this.SendAsync<BexioPosition>(this.Req(documentId, positionType).AddRequestBodyData(position), Method.POST, cancellationToken);
+            => this.SendAsync<BexioPosition>(this.Req(documentId, positionType).AddRequestBodyData(position), HttpMethod.Post, cancellationToken);
     }
 
     public class BexioApiInvoicePositionEndpoint : BexioApiPositionEndpoint, IBexioApiInvoicePositionEndpoint
@@ -100,22 +100,22 @@ namespace bexio_lib.Implementation.Endpoints
     {
         public BexioApiAdditionalAddressEndpoint(IBexioApi api) : base(api, BexioApiVersion.V2, "contact") { }
 
-        private RestRequest Req(int contactId, string suffix = null)
+        private BexioRequest Req(int contactId, string suffix = null)
             => this.NewRequest(suffix == null ? $"{contactId}/additional_address" : $"{contactId}/additional_address/{suffix}");
 
         public ICollection<BexioAdditionalAddress> GetAll(int contactId, BexioRequestFilter requestParameter = null)
-            => this.Send<ICollection<BexioAdditionalAddress>>(this.Req(contactId).AddRequestData(requestParameter), Method.GET);
+            => this.Send<ICollection<BexioAdditionalAddress>>(this.Req(contactId).AddRequestData(requestParameter), HttpMethod.Get);
 
         public BexioAdditionalAddress GetById(int contactId, int addressId)
-            => this.Send<BexioAdditionalAddress>(this.Req(contactId, addressId.ToString()), Method.GET);
+            => this.Send<BexioAdditionalAddress>(this.Req(contactId, addressId.ToString()), HttpMethod.Get);
 
         public BexioAdditionalAddress Create(int contactId, BexioAdditionalAddress address)
-            => this.Send<BexioAdditionalAddress>(this.Req(contactId).AddRequestBodyData(address), Method.POST);
+            => this.Send<BexioAdditionalAddress>(this.Req(contactId).AddRequestBodyData(address), HttpMethod.Post);
 
         public BexioAdditionalAddress Update(int contactId, int addressId, BexioAdditionalAddress address)
-            => this.Send<BexioAdditionalAddress>(this.Req(contactId, addressId.ToString()).AddRequestBodyData(address), Method.POST);
+            => this.Send<BexioAdditionalAddress>(this.Req(contactId, addressId.ToString()).AddRequestBodyData(address), HttpMethod.Post);
 
         public bool Delete(int contactId, int addressId)
-            => this.API.Execute(this.Req(contactId, addressId.ToString()), Method.DELETE).ToDeleteResult();
+            => this.API.Send(this.Req(contactId, addressId.ToString()), HttpMethod.Delete).ToDeleteResult();
     }
 }

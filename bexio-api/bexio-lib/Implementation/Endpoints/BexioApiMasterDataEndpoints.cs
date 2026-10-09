@@ -1,7 +1,7 @@
 using bexio_lib.Data;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using RestSharp;
+using System.Net.Http;
 
 namespace bexio_lib.Implementation.Endpoints
 {
@@ -58,8 +58,8 @@ namespace bexio_lib.Implementation.Endpoints
     {
         public BexioApiProjectEndpoint(IBexioApi api) : base(api, BexioApiVersion.V2, "pr_project") { }
 
-        public void Archive(int projectId) => this.Send(this.NewRequest($"{projectId}/archive"), Method.POST);
-        public void Unarchive(int projectId) => this.Send(this.NewRequest($"{projectId}/unarchive"), Method.POST);
+        public void Archive(int projectId) => this.Send(this.NewRequest($"{projectId}/archive"), HttpMethod.Post);
+        public void Unarchive(int projectId) => this.Send(this.NewRequest($"{projectId}/unarchive"), HttpMethod.Post);
     }
     public class BexioApiProjectTypeEndpoint : BexioApiFullEndpoint<BexioProjectType>, IBexioApiProjectTypeEndpoint
     {
