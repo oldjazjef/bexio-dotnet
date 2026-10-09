@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -118,7 +118,7 @@ namespace bexio_lib.Data
         public const string total_gross = BexioFilterFieldsBacklog.total_gross;
         public const string total_net = BexioFilterFieldsBacklog.total_net;
         public const string total = BexioFilterFieldsBacklog.total;
-        public const string is_valid_from = BexioFilterFieldsBacklog.is_valid_to;
+        public const string is_valid_from = BexioFilterFieldsBacklog.is_valid_from;
         public const string is_valid_to = BexioFilterFieldsBacklog.is_valid_to;
     }
 

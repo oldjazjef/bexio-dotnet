@@ -1,10 +1,8 @@
-﻿using bexio_lib.Interfaces;
+using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using RestSharp;
-using System;
+using System.Net.Http;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace bexio_lib.Implementation
@@ -14,74 +12,90 @@ namespace bexio_lib.Implementation
         public IBexioApi API { get; init; }
         public string ENDPOINT { get; init; }
 
-        public BexioApiEndpoint(IBexioApi api, string endpoint)
+        /// <param name="api">Api client</param>
+        /// <param name="version">Api version, see <see cref="bexio_lib.Data.BexioApiVersion"/></param>
+        /// <param name="endpoint">Resource path without version, e.g. "contact"</param>
+        public BexioApiEndpoint(IBexioApi api, string version, string endpoint)
         {
             this.API = api;
-            this.ENDPOINT = $"{this.API.API_URL}/{endpoint}";
+            this.ENDPOINT = $"{version}/{endpoint}";
         }
+
+        protected BexioRequest NewRequest(string suffix = null)
+        {
+            var resource = string.IsNullOrEmpty(suffix) ? this.ENDPOINT : $"{this.ENDPOINT}/{suffix}";
+            return new BexioRequest(resource);
+        }
+
+        protected T Send<T>(BexioRequest request, HttpMethod method)
+            => this.API.Send(request, method).DeserializeRequestResult<T>();
+
+        protected async Task<T> SendAsync<T>(BexioRequest request, HttpMethod method, CancellationToken ct)
+            => (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).DeserializeRequestResult<T>();
+
+        protected void Send(BexioRequest request, HttpMethod method)
+            => this.API.Send(request, method).EnsureSuccess();
+
+        protected async Task SendAsync(BexioRequest request, HttpMethod method, CancellationToken ct)
+            => (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).EnsureSuccess();
     }
 
     public abstract class BexioApiFullEndpoint<TEntity> : BexioApiEndpoint, IBexioApiFullEndpoint<TEntity>
     {
-
-        public BexioApiFullEndpoint(IBexioApi api, string endpoint) : base(api, endpoint)
+        public BexioApiFullEndpoint(IBexioApi api, string version, string endpoint) : base(api, version, endpoint)
         {
-
         }
 
         #region DEFAULTS
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="requestParameter"></param>
-        /// <returns></returns>
         public ICollection<TEntity> GetAll(BexioRequestFilter requestParameter = null)
-        {
-            var request = new RestRequest(this.ENDPOINT, DataFormat.Json)
-                .AddRequestData(requestParameter);
+            => this.Send<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get);
 
-            var result = this.API.Get(request)
-                .DeserializeRequestResult<ICollection<TEntity>>();
-
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public TEntity GetById(int id)
-        {
-            var request = new RestRequest($"{this.ENDPOINT}/{id}", DataFormat.Json);
+            => this.Send<TEntity>(this.NewRequest(id.ToString()), HttpMethod.Get);
 
-            var result = this.API.Get(request)
-                .DeserializeRequestResult<TEntity>();
-
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="requestParameter"></param>
-        /// <returns></returns>
         public ICollection<TEntity> Search(BexioRequestFilter requestParameter = null)
-        {
-            var request = new RestRequest($"{this.ENDPOINT}/search", DataFormat.Json)
-                .AddRequestData(requestParameter);
+            => this.Send<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), HttpMethod.Post);
 
-            var result = this.API.Post(request)
-                .DeserializeRequestResult<ICollection<TEntity>>();
+        public Task<ICollection<TEntity>> GetAllAsync(BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
+            => this.SendAsync<ICollection<TEntity>>(this.NewRequest().AddRequestData(requestParameter), HttpMethod.Get, cancellationToken);
 
-            return result;
-        }
+        public Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+            => this.SendAsync<TEntity>(this.NewRequest(id.ToString()), HttpMethod.Get, cancellationToken);
+
+        public Task<ICollection<TEntity>> SearchAsync(BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default)
+            => this.SendAsync<ICollection<TEntity>>(this.NewRequest("search").AddSearchData(requestParameter), HttpMethod.Post, cancellationToken);
 
         #endregion
     }
 
+    public abstract class BexioApiCrudEndpoint<TEntity> : BexioApiFullEndpoint<TEntity>, IBexioApiCrudEndpoint<TEntity>
+    {
+        public BexioApiCrudEndpoint(IBexioApi api, string version, string endpoint) : base(api, version, endpoint)
+        {
+        }
+
+        /// <summary>
+        /// Http method used to edit an entity. Bexio 2.0 edits with POST, 3.0 uses PUT.
+        /// </summary>
+        protected virtual HttpMethod UpdateMethod => HttpMethod.Post;
+
+        public TEntity Create(TEntity entity)
+            => this.Send<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post);
+
+        public TEntity Update(int id, TEntity entity)
+            => this.Send<TEntity>(this.NewRequest(id.ToString()).AddRequestBodyData(entity), this.UpdateMethod);
+
+        public bool Delete(int id)
+            => this.API.Send(this.NewRequest(id.ToString()), HttpMethod.Delete).ToDeleteResult();
+
+        public Task<TEntity> CreateAsync(TEntity entity, CancellationToken cancellationToken = default)
+            => this.SendAsync<TEntity>(this.NewRequest().AddRequestBodyData(entity), HttpMethod.Post, cancellationToken);
+
+        public Task<TEntity> UpdateAsync(int id, TEntity entity, CancellationToken cancellationToken = default)
+            => this.SendAsync<TEntity>(this.NewRequest(id.ToString()).AddRequestBodyData(entity), this.UpdateMethod, cancellationToken);
+
+        public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default)
+            => (await this.API.SendAsync(this.NewRequest(id.ToString()), HttpMethod.Delete, cancellationToken).ConfigureAwait(false)).ToDeleteResult();
+    }
 }

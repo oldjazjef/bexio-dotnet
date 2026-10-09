@@ -1,0 +1,51 @@
+name: Release
+
+# Push a tag like v1.2.3 to publish version 1.2.3 to nuget.org and create a GitHub release.
+# Publishes with NuGet trusted publishing (OIDC): no long-lived API key is stored.
+# Setup: nuget.org -> Account -> Trusted Publishing -> add policy for this repo, workflow file "release.yml" and environment "production",
+# then set the repository variable NUGET_USER to your nuget.org profile name (not your email).
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+  id-token: write   # needed for the OIDC token exchange with nuget.org
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: production   # must match the environment of the nuget.org trusted publishing policy
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Version from tag
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Build
+        run: dotnet build bexio-api/bexio-api.sln --configuration Release -p:Version=$VERSION
+
+      - name: Test
+        run: dotnet test bexio-api/bexio-api.sln --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack bexio-api/bexio-lib/bexio-lib.csproj --configuration Release --no-build -p:Version=$VERSION --output ./nupkg
+
+      - name: NuGet login (trusted publishing)
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push to nuget.org
+        run: dotnet nuget push "nupkg/*.nupkg" --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: nupkg/*.nupkg
+          generate_release_notes: true

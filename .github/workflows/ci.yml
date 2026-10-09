@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore bexio-api/bexio-api.sln
+
+      - name: Build
+        run: dotnet build bexio-api/bexio-api.sln --configuration Release --no-restore -warnaserror
+
+      - name: Test
+        run: >
+          dotnet test bexio-api/bexio-api.sln --configuration Release --no-build
+          --collect:"XPlat Code Coverage" --results-directory ./TestResults
+          --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+
+      - name: Pack (verifies the NuGet package builds)
+        run: dotnet pack bexio-api/bexio-lib/bexio-lib.csproj --configuration Release --no-build --output ./nupkg
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: nupkg/*.nupkg

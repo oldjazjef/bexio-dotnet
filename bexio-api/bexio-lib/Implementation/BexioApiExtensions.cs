@@ -1,54 +1,25 @@
-﻿using bexio_lib.Implementation.Endpoints;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using RestSharp;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace bexio_lib.Implementation
 {
     public static class BexioApiExtensions
     {
-        public static IServiceCollection AddBexioJwt(this IServiceCollection services, IConfiguration configuration)
+        private static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
         {
-    
-            var bexioApi = BexioApi.UseJwt(
-                configuration["bexioApiUrl"],
-                configuration["bexioApiKey"]);
-
-            services.AddSingleton<IBexioApi>(bexioApi);
-            services.AddBexioEndpoints();
-
-            return services;
-        }
-
-        public static IServiceCollection AddBexioEndpoints(this IServiceCollection services)
-        {
-            services
-                .AddTransient<IBexioApiOrderEndpoint, BexioApiOrderEndpoint>()
-                .AddTransient<IBexioApiArticleEndpoint, BexioApiArticleEndpoint>()
-                .AddTransient<IBexioApiContactEndpoint, BexioApiContactEndpoint>()
-                .AddTransient<IBexioApiCountryEndpoint, BexioApiCountryEndpoint>()
-                .AddTransient<IBexioApiCurrencyEndpoint, BexioApiCurrencyEndpoint>()
-                .AddTransient<IBexioApiDeliveryEndpoint, BexioApiDeliveryEndpoint>()
-                .AddTransient<IBexioApiInvoiceEndpoint, BexioApiInvoiceEndpoint>();
-
-            return services;
-        }
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         /// <summary>
-        /// Extension method to add bexio specific query params and json body parameters to the api request
+        /// Adds limit / offset / order_by query parameters
         /// </summary>
-        /// <param name="request">Request object to operate on</param>
-        /// <param name="requestParameters">Request parameter object</param>
-        /// <returns></returns>
-        public static RestRequest AddRequestData(this RestRequest request, BexioRequestFilter requestParameters)
+        public static BexioRequest AddRequestData(this BexioRequest request, BexioRequestFilter requestParameters)
         {
             if (requestParameters != null)
             {
@@ -64,49 +35,83 @@ namespace bexio_lib.Implementation
 
                 if (requestParameters.order_by?.Any() == true)
                 {
-                    request.AddQueryParameter("order_by", string.Join(',', requestParameters.order_by));
-                }
-
-                if (requestParameters?.Filters.Any() == true)
-                {
-                    request.AddRequestBodyData(requestParameters?.Filters);
+                    request.AddQueryParameter("order_by", string.Join(",", requestParameters.order_by));
                 }
             }
             return request;
         }
 
         /// <summary>
-        /// Adds data as json to bexio request body
+        /// Adds query parameters and the filter instructions as json body (search endpoints)
         /// </summary>
-        /// <param name="request">The request to operate on</param>
-        /// <param name="body">Data to add as json body</param>
-        /// <returns></returns>
-        public static RestRequest AddRequestBodyData(this RestRequest request, object body)
+        public static BexioRequest AddSearchData(this BexioRequest request, BexioRequestFilter requestParameters)
         {
-            request.AddJsonBody(body);
-            return request;
+            request.AddRequestData(requestParameters);
+            return request.AddRequestBodyData((object)(requestParameters?.Filters ?? new List<BexioRequestFilterInstruction>()));
         }
 
-        public static T DeserializeRequestResult<T>(this IRestResponse response)
+        /// <summary>
+        /// Adds data as json to bexio request body. Null properties are omitted.
+        /// </summary>
+        public static BexioRequest AddRequestBodyData(this BexioRequest request, object body)
         {
-            if (response.StatusCode != System.Net.HttpStatusCode.OK && response.StatusCode != System.Net.HttpStatusCode.Created)
+            return request.AddJsonBody(JsonConvert.SerializeObject(body, SerializerSettings));
+        }
+
+        private static bool IsSuccess(BexioResponse response)
+            => (int)response.StatusCode >= 200 && (int)response.StatusCode < 300;
+
+        /// <summary>
+        /// Throws a <see cref="BexioApiException"/> if the response is not a 2xx
+        /// </summary>
+        public static BexioResponse EnsureSuccess(this BexioResponse response)
+        {
+            if (!IsSuccess(response))
             {
-                throw new BexioApiException(response.Content);
+                var content = string.IsNullOrEmpty(response.Content) ? response.ErrorMessage : response.Content;
+                throw new BexioApiException(response.StatusCode == 0 ? (HttpStatusCode?)null : response.StatusCode, content);
             }
-            return JsonConvert.DeserializeObject<T>(response?.Content) ?? default;
+            return response;
+        }
+
+        public static T DeserializeRequestResult<T>(this BexioResponse response)
+        {
+            response.EnsureSuccess();
+            if (string.IsNullOrWhiteSpace(response.Content))
+            {
+                return default;
+            }
+            return JsonConvert.DeserializeObject<T>(response.Content);
+        }
+
+        /// <summary>
+        /// Delete answers either with 204, or 200 and {"success": true}
+        /// </summary>
+        public static bool ToDeleteResult(this BexioResponse response)
+        {
+            response.EnsureSuccess();
+            if (string.IsNullOrWhiteSpace(response.Content))
+            {
+                return true;
+            }
+            try
+            {
+                var success = JToken.Parse(response.Content)["success"];
+                return success == null || success.Type != JTokenType.Boolean || (bool)success;
+            }
+            catch (JsonException)
+            {
+                return true;
+            }
         }
 
         /// <summary>
         /// Extension method to add new filter instruction to bexio request
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="instruction"></param>
-        /// <returns></returns>
         public static BexioRequestFilter Add(this BexioRequestFilter filter, BexioRequestFilterInstruction instruction)
         {
             filter.Filters.Add(instruction);
             return filter;
         }
-
     }
 }

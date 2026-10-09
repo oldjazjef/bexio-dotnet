@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +25,10 @@ namespace bexio_lib.Models
         public int? article_id { get; set; }
         public string type { get; set; }
         public int? parent_id { get; set; }
+        public bool? is_percentual { get; set; }
+        public float? value { get; set; }
+        public bool? show_pos_nr { get; set; }
+        public string internal_pos { get; set; }
     }
 
 }

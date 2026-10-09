@@ -1,19 +1,21 @@
-﻿using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using bexio_lib.Implementation;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace bexio_lib.Interfaces
 {
+    /// <summary>
+    /// Transport layer: sends a request to bexio (auth, base url, retry) and returns the raw response.
+    /// </summary>
     public interface IBexioApi
     {
-        string API_URL { get; init; }
-        RestClient CLIENT { get; init; }
+        /// <summary>
+        /// Base url of the api without version segment, e.g. https://api.bexio.com
+        /// </summary>
+        string API_URL { get; }
 
-        IRestResponse Post(RestRequest request);
-
-        IRestResponse Get(RestRequest request);
+        BexioResponse Send(BexioRequest request, HttpMethod method);
+        Task<BexioResponse> SendAsync(BexioRequest request, HttpMethod method, CancellationToken cancellationToken = default);
     }
 }
