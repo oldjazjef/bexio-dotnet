@@ -15,6 +15,8 @@ Requirements: .NET 10 (LTS).
 
 ## Concepts in one minute
 
+![Architecture: IBexioClient groups the endpoints by api version, IBexioApi is the transport](images/architecture.webp)
+
 ```
 IBexioClient                      entry point, one per bexio account
  ├─ V2 / V3 / V4                  endpoints grouped by api version

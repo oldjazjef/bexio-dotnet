@@ -20,6 +20,8 @@ Publishing uses **NuGet trusted publishing** (OIDC), no API key is stored:
 1. nuget.org: Account, Trusted Publishing, add a policy for this repository, workflow file `release.yml` and the environment `production`.
 2. GitHub: create the environment `production` and the repository variable `NUGET_USER` (your nuget.org profile name).
 
+The same package is also pushed to **GitHub Packages** (`https://nuget.pkg.github.com/<owner>/index.json`) with the built-in `GITHUB_TOKEN`, so it shows up under *Packages* of the repository. Installing from GitHub Packages always needs a token with `read:packages`; for consumers nuget.org is the main source.
+
 A published version cannot be deleted on nuget.org, only unlisted or deprecated.
 
 ## Dependencies

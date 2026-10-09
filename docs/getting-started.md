@@ -40,6 +40,8 @@ The older `services.AddBexioJwt(configuration)` (keys `bexioApiKey` and `bexioAp
 
 ## First call
 
+![Example: setup, search, paging and an api 3.0 call](images/usage-example.webp)
+
 Inject `IBexioClient`:
 
 ```csharp

@@ -14,6 +14,8 @@ Create the token in bexio and pass it as `BexioOptions.AccessToken` (see [Gettin
 
 ## OAuth2 (authorization code flow)
 
+![OAuth2 flow between your app, auth.bexio.com and the token store](images/oauth-flow.webp)
+
 bexio uses OpenID Connect at `https://auth.bexio.com/realms/bexio`.
 
 1. Register your app in the bexio developer portal and note client id and secret. Set the redirect uri.
