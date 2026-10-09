@@ -1,4 +1,6 @@
 
+
+![bexio-dotnet](docs/images/bexio-dotnet.webp)
 # dotnet core Bexio client
 
 This repository contains a dotnet / dotnet core compatible Bexio client.
