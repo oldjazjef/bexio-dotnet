@@ -4,7 +4,7 @@
 This repository contains a dotnet / dotnet core compatible Bexio client.
 
 Supports **bexio API v2.0, v3.0 and v4.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
-All endpoints offer sync and async (`...Async`) methods, targets .NET 8.
+All endpoints offer sync and async (`...Async`) methods, targets .NET 10 (LTS).
 
 #### API 2.0 (`bexio_lib.Interfaces`)
 - Sales: orders (`kb_order`), offers (`kb_offer`), invoices (`kb_invoice`), deliveries (`kb_delivery`) incl. issue / revoke / cancel / send / mark as sent / pdf / convert (offer -> order/invoice, order -> invoice/delivery)
