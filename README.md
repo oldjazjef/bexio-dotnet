@@ -100,8 +100,13 @@ await foreach (var c in _bexio.V2.Contacts.GetAllPagesAsync()) { ... }
 
 Failed requests throw a `BexioApiException` with `StatusCode` and the raw `Content`.
 
-### Tests
+### Tests, CI and release
 `dotnet test bexio-api/BexioLibTest` runs unit tests against a fake api. Integration tests run only if `bexioApiKey` is set as environment variable.
+Transport behaviour (auth header, url, retry, multipart, paging) is tested against a stubbed `HttpMessageHandler`.
+
+- **CI** (`.github/workflows/ci.yml`): build with warnings as errors, tests with coverage, NuGet pack on every push / pull request.
+- **Release** (`.github/workflows/release.yml`): push a tag `v1.2.3` and the package `Bexio.DotNet` is tested, packed with that version, pushed to nuget.org and attached to a GitHub release. Needs the repository secret `NUGET_API_KEY`.
+- Dependabot keeps NuGet packages and actions up to date.
 
 ### Documentation
 Coming soon
