@@ -4,25 +4,27 @@
 
 This repository contains a dotnet / dotnet core compatible Bexio client.
 
-Supports **bexio API v2.0 and v3.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
-All endpoints offer sync and async (`...Async`) methods, targets .NET 10 (LTS).
+Supports **every operation of the bexio API 2.0 and 3.0** (272 operations). Endpoints and models are generated from the official OpenAPI description of [docs.bexio.com](https://docs.bexio.com/), so the client covers what bexio documents and follows it when it changes. Every endpoint knows its own version, so both can be used side by side with one access token. All calls exist as sync and async (`...Async`) methods, targets .NET 10 (LTS).
 
-#### API 2.0 (`bexio_lib.Interfaces`)
-- Sales: orders (`kb_order`), offers (`kb_offer`), invoices (`kb_invoice`), deliveries (`kb_delivery`) incl. issue / revoke / cancel / send / mark as sent / pdf / convert (offer -> order/invoice, order -> invoice/delivery)
-- Invoice payments, document positions (invoice / order / offer)
-- Contacts, contact relations / groups / sectors, additional addresses, salutations, titles
-- Articles, article types, units, stock, stock places
-- Projects, project types / states, timesheets, client services, communication kinds, notes, tasks
-- Accounts, account groups, countries, currencies, languages, payment types, users, fictional users, company profile
+#### API 2.0 (`client.V2`)
+- **Contacts:** contacts (incl. restore and bulk create), relations, groups, sectors, additional addresses, salutations, titles
+- **Sales:** quotes, orders (incl. repetitions), invoices (incl. payments, reminders, copy, cancel, send, pdf), delivery notes, conversions between documents
+- **Document positions and comments:** all position types (item, custom, text, subtotal, sub position, discount, page break) and comments of quotes, orders and invoices
+- **Items and stock:** items, stock locations and areas
+- **Projects and time tracking:** projects (archive / reactivate), timesheets, business activities, notes, tasks
+- **Master data:** accounts, account groups, countries, languages, communication types, payment types, units, company profile, document settings
 
-#### API 3.0 (`bexio_lib.Interfaces.V3`)
-- Currencies (+ exchange rates), taxes, users (+ `me`)
-- Accounting: calendar years, business years, VAT periods, manual entries (+ next reference number), journal
-- Banking: bank accounts
-- Files: list, upload, download, delete
+#### API 3.0 (`client.V3`)
+- **Accounting:** calendar years, business years, VAT periods, manual entries (incl. files and next reference number), journal
+- **Banking and money:** bank accounts, currencies (incl. exchange rates), taxes
+- **Files:** upload, download, preview, search, usage
+- **Projects:** milestones and work packages
+- **Purchase:** purchase orders
+- **Users:** users, fictional users, permissions, document templates, reports
 
-Entities with write access (`IBexioApiCrudEndpoint`) support `Create`, `Update` and `Delete`; all others `GetById`, `GetAll` and `Search`.
-Resources not covered yet can be added by deriving from `BexioApiCrudEndpoint<T>` / `BexioApiFullEndpoint<T>` with the matching `BexioApiVersion`.
+All operations with their methods and scopes: [docs/endpoints.md](docs/endpoints.md). Method names are the operation ids of the bexio documentation (`ListContacts`, `ShowContact`, `CreateContact`, `EditContact`, ...). Groups with a main collection additionally offer the short forms `GetAll`, `GetById`, `Search`, `Create`, `Update` and `Delete`, and list / search operations offer `...PagesAsync` to read all pages.
+
+> bexio also has an API 4.0 (contacts v2, purchase, payroll, ...). It is not part of this library yet.
 
 If you find something missing or broken, please [report an issue][github-issue] or even better fork the repo and submit a pull request
 
@@ -139,11 +141,11 @@ public class LeadsController : ControllerBase
 #### Async, v3, CRUD, paging
 
 ```csharp
-var currencies = await _bexio.V3.Currencies.GetAllAsync();
-var contact = await _bexio.V2.Contacts.CreateAsync(new BexioContact { name_1 = "Muster AG", contact_type_id = BexioContactTypes.COMPANY, user_id = 1, owner_id = 1 });
+var currencies = await _bexio.V3.Currencies.ListCurrenciesAsync();
+var contact = await _bexio.V2.Contacts.CreateAsync(new BexioContactRequest { name_1 = "Muster AG", contact_type_id = BexioContactTypes.COMPANY, user_id = 1, owner_id = 1 });
 
 // every contact, page by page
-await foreach (var c in _bexio.V2.Contacts.GetAllPagesAsync()) { ... }
+await foreach (var c in _bexio.V2.Contacts.ListContactsPagesAsync()) { ... }
 ```
 
 Failed requests throw a `BexioApiException` with `StatusCode` and the raw `Content`.
@@ -155,6 +157,22 @@ Transport behaviour (auth header, url, retry, multipart, paging) is tested again
 - **CI** (`.github/workflows/ci.yml`): build with warnings as errors, tests with coverage, NuGet pack on every push / pull request.
 - **Release** (`.github/workflows/release.yml`): push a tag `v1.2.3` and the package `Bexio.DotNet` is tested, packed with that version, pushed to nuget.org and attached to a GitHub release. Publishing uses [NuGet trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing) (OIDC, no API key stored): add a trusted publishing policy on nuget.org for this repository, `release.yml` and the GitHub environment `production`, and set the repository variable `NUGET_USER` to your nuget.org profile name.
 - Dependabot keeps NuGet packages and actions up to date.
+
+### Upgrading from 2.x
+
+3.0 replaces the hand written endpoints by generated ones. `GetAll`, `GetById`, `Search`, `Create`, `Update` and `Delete` still exist on the main collection of each group, but the groups, models and action methods are named after the bexio documentation:
+
+| 2.x | 3.0 |
+|---|---|
+| `IBexioApiInvoiceEndpoint`, `client.V2.Invoices` | `IBexioApiInvoicesEndpoint`, `client.V2.Invoices` |
+| `Issue(id)`, `Send(id, ...)`, `MarkSent(id)` | `IssueInvoice(id)`, `SendInvoice(id, ...)`, `MarkAsSentInvoice(id)` |
+| `Revoke(id)` | `RevertIssueInvoice(id)` |
+| `GetPdf(id)` | `ShowInvoicePDF(id, logopaper)` |
+| `BexioContact` (create / edit) | `BexioContactRequest` |
+| `client.V2.Offers` | `client.V2.Quotes` |
+| `client.V2.Articles` | `client.V2.Items` |
+| `GetAllPagesAsync()` | `ListContactsPagesAsync()` (per operation) |
+| `client.V4` | removed, API 4.0 is not part of the library |
 
 ### Documentation
 

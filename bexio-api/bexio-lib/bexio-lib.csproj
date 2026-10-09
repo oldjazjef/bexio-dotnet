@@ -10,9 +10,9 @@
     <PackageProjectUrl>https://github.com/oldjazjef/bexio-dotnet/tree/main/docs</PackageProjectUrl>
 
     <PackageId>Bexio.DotNet</PackageId>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Authors>Emanuel Mistretta</Authors>
-    <Description>.NET client for the bexio API (2.0 and 3.0) with personal access token and OAuth2 support, async, retry on rate limits and dependency injection.</Description>
+    <Description>.NET client for the bexio API (2.0 and 3.0, all documented operations) with personal access token and OAuth2 support, async, retry on rate limits and dependency injection.</Description>
     <PackageTags>bexio;api;client;accounting;invoice</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>

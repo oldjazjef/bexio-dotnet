@@ -18,7 +18,7 @@ namespace BexioLibTest.Unit
 
         public List<(BexioRequest Request, HttpMethod Method)> Calls { get; } = new();
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
-        public string Content { get; set; } = "{}";
+        public string Content { get; set; } = "null";
 
         public (BexioRequest Request, HttpMethod Method) Last => this.Calls.Last();
 

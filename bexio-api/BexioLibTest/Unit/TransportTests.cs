@@ -68,7 +68,7 @@ namespace BexioLibTest.Unit
         public async Task Sends_json_body_on_create()
         {
             this._handler.Responses.Enqueue(_ => StubHandler.Json(HttpStatusCode.Created, "{\"id\":9}"));
-            var created = await this.Client().V2.Contacts.CreateAsync(new BexioContact { name_1 = "Muster" });
+            var created = await this.Client().V2.Contacts.CreateAsync(new BexioContactRequest { name_1 = "Muster" });
             Assert.Equal(9, created.id);
             var (request, body) = this._handler.Requests.Single();
             Assert.Equal(HttpMethod.Post, request.Method);
@@ -100,7 +100,7 @@ namespace BexioLibTest.Unit
         public async Task Does_not_retry_client_errors()
         {
             this._handler.Responses.Enqueue(_ => StubHandler.Json(HttpStatusCode.UnprocessableEntity, "{\"message\":\"bad\"}"));
-            await Assert.ThrowsAsync<BexioApiException>(() => this.Client().V2.Contacts.CreateAsync(new BexioContact()));
+            await Assert.ThrowsAsync<BexioApiException>(() => this.Client().V2.Contacts.CreateAsync(new BexioContactRequest()));
             Assert.Single(this._handler.Requests);
         }
 
@@ -108,15 +108,15 @@ namespace BexioLibTest.Unit
         public async Task Upload_is_multipart_and_download_returns_bytes()
         {
             this._handler.Responses.Enqueue(_ => StubHandler.Json(HttpStatusCode.OK, "[{\"id\":3,\"name\":\"a.txt\"}]"));
-            var file = await this.Client().V3.Files.UploadAsync("a.txt", Encoding.UTF8.GetBytes("hello"));
-            Assert.Equal(3, file.id);
+            var files = await this.Client().V3.Files.CreateFileAsync("a.txt", Encoding.UTF8.GetBytes("hello"));
+            Assert.Equal(3, files.Single().id);
             var (request, body) = this._handler.Requests.Single();
             Assert.StartsWith("multipart/form-data", request.Content.Headers.ContentType.MediaType);
             Assert.Contains("filename=a.txt", body);
             Assert.Contains("hello", body);
 
             this._handler.Responses.Enqueue(_ => new HttpResponseMessage(HttpStatusCode.OK) { Content = new ByteArrayContent(new byte[] { 1, 2, 3 }) });
-            Assert.Equal(new byte[] { 1, 2, 3 }, await this.Client().V3.Files.DownloadAsync(3));
+            Assert.Equal(new byte[] { 1, 2, 3 }, await this.Client().V3.Files.DownloadFileAsync(3));
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace BexioLibTest.Unit
             this._handler.Responses.Enqueue(_ => StubHandler.Json(HttpStatusCode.OK, "[{\"id\":1},{\"id\":2}]"));
             this._handler.Responses.Enqueue(_ => StubHandler.Json(HttpStatusCode.OK, "[{\"id\":3}]"));
             var ids = new List<int?>();
-            await foreach (var c in this.Client().V2.Contacts.GetAllPagesAsync(pageSize: 2)) ids.Add(c.id);
+            await foreach (var c in this.Client().V2.Contacts.ListContactsPagesAsync(pageSize: 2)) ids.Add(c.id);
             Assert.Equal(new int?[] { 1, 2, 3 }, ids);
             Assert.EndsWith("limit=2&offset=2", this._handler.Requests[1].Request.RequestUri.Query);
         }

@@ -87,6 +87,8 @@ namespace bexio_lib.Implementation
         /// <summary>
         /// Delete answers either with 204, or 200 and {"success": true}
         /// </summary>
+        public static bool ToSuccessResult(this BexioResponse response) => response.ToDeleteResult();
+
         public static bool ToDeleteResult(this BexioResponse response)
         {
             response.EnsureSuccess();
@@ -96,7 +98,11 @@ namespace bexio_lib.Implementation
             }
             try
             {
-                var success = JToken.Parse(response.Content)["success"];
+                if (!(JToken.Parse(response.Content) is JObject obj))
+                {
+                    return true;
+                }
+                var success = obj["success"];
                 return success == null || success.Type != JTokenType.Boolean || (bool)success;
             }
             catch (JsonException)

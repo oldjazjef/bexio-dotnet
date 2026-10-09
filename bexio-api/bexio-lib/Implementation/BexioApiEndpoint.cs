@@ -2,6 +2,8 @@ using bexio_lib.Interfaces;
 using bexio_lib.Models;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +27,85 @@ namespace bexio_lib.Implementation
         {
             var resource = string.IsNullOrEmpty(suffix) ? this.ENDPOINT : $"{this.ENDPOINT}/{suffix}";
             return new BexioRequest(resource);
+        }
+
+        /// <summary>Request for a complete path including the api version, e.g. "2.0/contact/5".</summary>
+        protected BexioRequest NewRequestFor(string path) => new BexioRequest(path);
+
+        /// <summary>Adds a query parameter. null is skipped, bool is sent lower case, collections comma separated.</summary>
+        protected void AddQuery(BexioRequest request, string name, object value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+            string text;
+            if (value is bool flag)
+            {
+                text = flag ? "true" : "false";
+            }
+            else if (value is System.Collections.IEnumerable list && !(value is string))
+            {
+                text = string.Join(",", list.Cast<object>().Select(x => System.Convert.ToString(x, CultureInfo.InvariantCulture)));
+            }
+            else
+            {
+                text = System.Convert.ToString(value, CultureInfo.InvariantCulture);
+            }
+            request.AddQueryParameter(name, text);
+        }
+
+        protected bool SendSuccess(BexioRequest request, HttpMethod method)
+            => this.API.Send(request, method).ToSuccessResult();
+
+        protected async Task<bool> SendSuccessAsync(BexioRequest request, HttpMethod method, CancellationToken ct)
+            => (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).ToSuccessResult();
+
+        protected byte[] SendBytes(BexioRequest request, HttpMethod method)
+        {
+            request.Accept = "*/*";
+            return this.API.Send(request, method).EnsureSuccess().RawBytes;
+        }
+
+        protected async Task<byte[]> SendBytesAsync(BexioRequest request, HttpMethod method, CancellationToken ct)
+        {
+            request.Accept = "*/*";
+            return (await this.API.SendAsync(request, method, ct).ConfigureAwait(false)).EnsureSuccess().RawBytes;
+        }
+
+        /// <summary>Reads all pages of a list / search operation (limit and offset are set per page).</summary>
+        protected async IAsyncEnumerable<T> Pages<T>(
+            System.Func<BexioRequestFilter, CancellationToken, Task<ICollection<T>>> fetch,
+            BexioRequestFilter filter,
+            int pageSize,
+            [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
+        {
+            var offset = 0;
+            while (true)
+            {
+                var page = new BexioRequestFilter { limit = pageSize, offset = offset, order_by = filter?.order_by };
+                if (filter != null)
+                {
+                    foreach (var instruction in filter.Filters)
+                    {
+                        page.Filters.Add(instruction);
+                    }
+                }
+                var items = await fetch(page, cancellationToken).ConfigureAwait(false);
+                if (items == null || items.Count == 0)
+                {
+                    yield break;
+                }
+                foreach (var item in items)
+                {
+                    yield return item;
+                }
+                if (items.Count < pageSize)
+                {
+                    yield break;
+                }
+                offset += items.Count;
+            }
         }
 
         protected T Send<T>(BexioRequest request, HttpMethod method)

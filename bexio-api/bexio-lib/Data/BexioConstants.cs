@@ -17,6 +17,7 @@ namespace bexio_lib.Data
         public const string LIKE = "like";
         public const string NOT_LIKE = "not_like";
         public const string IS_NULL = "is_null";
+        public const string NOT_NULL = "not_null";
         public const string IN = "in";
         public const string NOT_IN = "not_in";
     }
