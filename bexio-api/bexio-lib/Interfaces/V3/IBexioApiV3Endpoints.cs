@@ -40,6 +40,7 @@ namespace bexio_lib.Interfaces.V3
     {
         /// <param name="from">Start date (yyyy-MM-dd)</param>
         /// <param name="to">End date (yyyy-MM-dd)</param>
+        /// <param name="requestParameter">Optional limit / offset / order</param>
         ICollection<BexioJournalEntry> GetAll(string from = null, string to = null, BexioRequestFilter requestParameter = null);
         Task<ICollection<BexioJournalEntry>> GetAllAsync(string from = null, string to = null, BexioRequestFilter requestParameter = null, CancellationToken cancellationToken = default);
     }
