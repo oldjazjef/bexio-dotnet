@@ -46,7 +46,7 @@ services.AddBexio(Configuration.GetSection("Bexio"));
 services.AddBexio(o => o.AccessToken = "myApiKey");
 ```
 
-Options (`BexioOptions`): `AccessToken`, `AccessTokenProvider` (async callback, e.g. to refresh OAuth2 tokens), `BaseUrl`, `MaxRetries`, `RetryBaseDelay`, `RetryMaxDelay`, `Timeout`.
+Options (`BexioOptions`): `AccessToken` (personal access token), `AccessTokenProvider` (async callback, e.g. to refresh OAuth2 tokens), `BaseUrl`, `MaxRetries`, `RetryBaseDelay`, `RetryMaxDelay`, `Timeout`.
 The old `services.AddBexioJwt(configuration)` (keys `bexioApiKey` / `bexioApiUrl`) still works.
 
 **Without dependency injection / several bexio accounts**: use the factory
@@ -57,6 +57,59 @@ var client = factory.Create("myApiKey");     // IBexioClient
 ```
 
 Requests answered with 429 (rate limit) or 503 are retried automatically (honors `Retry-After`, exponential backoff otherwise).
+
+#### Authentication: personal access token or OAuth2
+
+Two ways to authenticate against bexio are supported:
+
+| | Personal access token (PAT) | OAuth2 (app registered at bexio) |
+|---|---|---|
+| For | own scripts / internal tools | apps used with several bexio accounts |
+| Setup | `AccessToken` in `BexioOptions` | `AddBexioOAuth` + token store |
+
+##### OAuth2 (authorization code flow)
+
+1. Register your app in the bexio developer portal and note client id / secret, set the redirect uri.
+2. Register the services. The OAuth tokens are fetched, refreshed shortly before they expire and handed to every API request automatically:
+
+```csharp
+services.AddBexio(_ => { });                       // no static token needed
+services.AddBexioOAuth(o =>
+{
+    o.ClientId = "...";
+    o.ClientSecret = "...";
+    o.RedirectUri = "https://myapp.example/bexio/callback";
+    o.Scopes = new[] { "contact_show", "kb_invoice_edit" };   // "openid" and "offline_access" are added for you
+});
+services.AddSingleton<IBexioTokenStore, MyDatabaseTokenStore>();   // see below
+```
+
+Or bind from configuration: `services.AddBexioOAuth(Configuration.GetSection("BexioOAuth"))`.
+
+3. Send the user to bexio and handle the redirect:
+
+```csharp
+// 1) redirect the user
+var url = _oauth.GetAuthorizationUrl(state);        // IBexioOAuthClient, "state": random value, verify it on the callback
+return Redirect(url);
+
+// 2) on your redirect uri
+var token = await _oauth.ExchangeCodeAsync(code);
+await _tokenStore.SaveAsync(token);
+```
+
+From then on `IBexioClient` and all endpoints use (and refresh) that token.
+
+**Token store.** Bexio rotates refresh tokens, so the newest token must be persisted. Implement `IBexioTokenStore` (`GetAsync` / `SaveAsync`) on top of your database. The default `InMemoryBexioTokenStore` loses tokens on restart and is only meant for tests. The token provider is a singleton, so register the store as singleton as well (use `IServiceScopeFactory` inside it if it needs scoped services like a DbContext).
+
+**Several bexio accounts (multi tenant).** Create one store per connection and build a client per customer:
+
+```csharp
+var provider = new BexioOAuthTokenProvider(oauthClient, storeOfThisCustomer, oauthOptions);
+IBexioClient client = factory.Create(provider);     // IBexioClientFactory
+```
+
+Without DI: `new BexioOAuthClient(httpClient, new BexioOAuthOptions { ... })`.
 
 #### Consume api
 
