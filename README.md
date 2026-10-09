@@ -105,7 +105,7 @@ Failed requests throw a `BexioApiException` with `StatusCode` and the raw `Conte
 Transport behaviour (auth header, url, retry, multipart, paging) is tested against a stubbed `HttpMessageHandler`.
 
 - **CI** (`.github/workflows/ci.yml`): build with warnings as errors, tests with coverage, NuGet pack on every push / pull request.
-- **Release** (`.github/workflows/release.yml`): push a tag `v1.2.3` and the package `Bexio.DotNet` is tested, packed with that version, pushed to nuget.org and attached to a GitHub release. Needs the repository secret `NUGET_API_KEY`.
+- **Release** (`.github/workflows/release.yml`): push a tag `v1.2.3` and the package `Bexio.DotNet` is tested, packed with that version, pushed to nuget.org and attached to a GitHub release. Publishing uses [NuGet trusted publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing) (OIDC, no API key stored): add a trusted publishing policy on nuget.org for this repository and `release.yml`, and set the repository variable `NUGET_USER` to your nuget.org profile name.
 - Dependabot keeps NuGet packages and actions up to date.
 
 ### Documentation
