@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload test results and coverage
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: test-results
           path: TestResults/
@@ -41,7 +41,7 @@ jobs:
       - name: Pack (verifies the NuGet package builds)
         run: dotnet pack bexio-api/bexio-lib/bexio-lib.csproj --configuration Release --no-build --output ./nupkg
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: nupkg
           path: nupkg/*.nupkg
