@@ -2,7 +2,6 @@ using bexio_lib.Data;
 using bexio_lib.Implementation;
 using bexio_lib.Implementation.Endpoints;
 using bexio_lib.Implementation.Endpoints.V3;
-using bexio_lib.Implementation.Endpoints.V4;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,18 +37,6 @@ namespace BexioLibTest.Unit
             this._api.Content = "{\"next_ref_nr\":\"MA-1\"}";
             Assert.Equal("MA-1", new BexioApiManualEntryEndpoint(this._api).GetNextReferenceNumber());
             Assert.Equal("3.0/accounting/manual_entries/next_ref_nr", this._api.Resource);
-        }
-
-        [Fact]
-        public void V4_uses_string_ids_and_put()
-        {
-            var bills = new BexioApiBillEndpoint(this._api);
-            bills.GetById("abc-1");
-            Assert.Equal("4.0/purchase/bills/abc-1", this._api.Resource);
-            bills.Update("abc-1", new BexioBill { title = "x" });
-            Assert.Equal(HttpMethod.Put, this._api.LastMethod);
-            new BexioApiEmployeeEndpoint(this._api).GetById("e1");
-            Assert.Equal("4.0/payroll/employees/e1", this._api.Resource);
         }
 
         [Fact]
@@ -192,8 +179,6 @@ namespace BexioLibTest.Unit
             Assert.Equal("2.0/contact", this._api.Resource);
             client.V3.Currencies.GetAll();
             Assert.Equal("3.0/currencies", this._api.Resource);
-            client.V4.Bills.GetAll();
-            Assert.Equal("4.0/purchase/bills", this._api.Resource);
             Assert.Same(client.V2.Contacts, client.V2.Contacts);
         }
 
@@ -205,7 +190,7 @@ namespace BexioLibTest.Unit
             var provider = services.BuildServiceProvider();
 
             var endpointInterfaces = typeof(IBexioApi).Assembly.GetTypes()
-                .Where(t => t.IsInterface && t.Name.StartsWith("IBexioApi") && t.Name.EndsWith("Endpoint") && !t.IsGenericType && t.Name != "IBexioApiEndpoint" && t.Name != "IBexioApiV4Endpoint`1" && t.Name != "IBexioApiPositionEndpoint");
+                .Where(t => t.IsInterface && t.Name.StartsWith("IBexioApi") && t.Name.EndsWith("Endpoint") && !t.IsGenericType && t.Name != "IBexioApiEndpoint" && t.Name != "IBexioApiPositionEndpoint");
             foreach (var i in endpointInterfaces)
             {
                 Assert.NotNull(provider.GetService(i));

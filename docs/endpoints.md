@@ -5,11 +5,10 @@ Every endpoint has sync and `...Async` methods.
 
 Access levels:
 - **read**: `GetById`, `GetAll`, `Search` (+ async variants)
-- **CRUD**: read plus `Create`, `Update`, `Delete`. api 2.0 edits with `POST`, 3.0 and 4.0 with `PUT`.
-- **CRUD (string ids)**: api 4.0 resources use uuid string ids: `GetById(string)`, `Update(string, ...)`, `Delete(string)`.
+- **CRUD**: read plus `Create`, `Update`, `Delete`. api 2.0 edits with `POST`, 3.0 with `PUT`.
 - Other entries list the extra actions of the endpoint.
 
-> The api 3.0 and 4.0 endpoints and the models of the newer resources were written without access to the bexio documentation and have not been verified against the real API yet. Please open an issue if a path or field does not match.
+> The api 3.0 endpoints and the models of the newer resources were written without access to the bexio documentation and have not been verified against the real API yet. Please open an issue if a path or field does not match.
 
 ## API 2.0
 
@@ -68,15 +67,5 @@ Access levels:
 | `Taxes` | `IBexioApiTaxEndpoint` | `3.0/taxes` | read, delete |
 | `Users` | `IBexioApiUserV3Endpoint` | `3.0/users` | read, `GetMe()` |
 | `VatPeriods` | `IBexioApiVatPeriodEndpoint` | `3.0/accounting/vat_periods` | read |
-
-## API 4.0
-
-| `client.V4.…` | Interface | Resource | Access |
-|---|---|---|---|
-| `Absences` | `IBexioApiAbsenceEndpoint` | `4.0/payroll/absences` | CRUD (string ids) |
-| `Bills` | `IBexioApiBillEndpoint` | `4.0/purchase/bills` | CRUD (string ids) |
-| `Employees` | `IBexioApiEmployeeEndpoint` | `4.0/payroll/employees` | CRUD (string ids) |
-| `Expenses` | `IBexioApiExpenseEndpoint` | `4.0/expenses` | CRUD (string ids) |
-| `OutgoingPayments` | `IBexioApiOutgoingPaymentEndpoint` | `4.0/purchase/outgoing-payments` | CRUD (string ids) |
 
 Missing a resource? Derive from `BexioApiCrudEndpoint<T>` or `BexioApiFullEndpoint<T>`, pass the api version and path, and register it. See [Extending](usage.md#extending-with-your-own-endpoint).

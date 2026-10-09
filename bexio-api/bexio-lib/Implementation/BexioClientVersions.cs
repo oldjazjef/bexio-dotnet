@@ -1,9 +1,7 @@
 using bexio_lib.Implementation.Endpoints;
 using bexio_lib.Implementation.Endpoints.V3;
-using bexio_lib.Implementation.Endpoints.V4;
 using bexio_lib.Interfaces;
 using bexio_lib.Interfaces.V3;
-using bexio_lib.Interfaces.V4;
 
 namespace bexio_lib.Implementation
 {
@@ -182,35 +180,5 @@ namespace bexio_lib.Implementation
         public IBexioApiTaxEndpoint Taxes => this._Taxes ??= new BexioApiTaxEndpoint(this._api);
         public IBexioApiUserV3Endpoint Users => this._Users ??= new BexioApiUserV3Endpoint(this._api);
         public IBexioApiVatPeriodEndpoint VatPeriods => this._VatPeriods ??= new BexioApiVatPeriodEndpoint(this._api);
-    }
-
-    public interface IBexioV4
-    {
-        IBexioApiAbsenceEndpoint Absences { get; }
-        IBexioApiBillEndpoint Bills { get; }
-        IBexioApiEmployeeEndpoint Employees { get; }
-        IBexioApiExpenseEndpoint Expenses { get; }
-        IBexioApiOutgoingPaymentEndpoint OutgoingPayments { get; }
-    }
-
-    public class BexioV4 : IBexioV4
-    {
-        private readonly IBexioApi _api;
-        private IBexioApiAbsenceEndpoint _Absences;
-        private IBexioApiBillEndpoint _Bills;
-        private IBexioApiEmployeeEndpoint _Employees;
-        private IBexioApiExpenseEndpoint _Expenses;
-        private IBexioApiOutgoingPaymentEndpoint _OutgoingPayments;
-
-        public BexioV4(IBexioApi api)
-        {
-            this._api = api;
-        }
-
-        public IBexioApiAbsenceEndpoint Absences => this._Absences ??= new BexioApiAbsenceEndpoint(this._api);
-        public IBexioApiBillEndpoint Bills => this._Bills ??= new BexioApiBillEndpoint(this._api);
-        public IBexioApiEmployeeEndpoint Employees => this._Employees ??= new BexioApiEmployeeEndpoint(this._api);
-        public IBexioApiExpenseEndpoint Expenses => this._Expenses ??= new BexioApiExpenseEndpoint(this._api);
-        public IBexioApiOutgoingPaymentEndpoint OutgoingPayments => this._OutgoingPayments ??= new BexioApiOutgoingPaymentEndpoint(this._api);
     }
 }

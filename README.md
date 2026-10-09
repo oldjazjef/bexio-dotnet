@@ -4,7 +4,7 @@
 
 This repository contains a dotnet / dotnet core compatible Bexio client.
 
-Supports **bexio API v2.0, v3.0 and v4.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
+Supports **bexio API v2.0 and v3.0**. Every endpoint knows its own version, so both can be used side by side with one api key.
 All endpoints offer sync and async (`...Async`) methods, targets .NET 10 (LTS).
 
 #### API 2.0 (`bexio_lib.Interfaces`)
@@ -20,12 +20,6 @@ All endpoints offer sync and async (`...Async`) methods, targets .NET 10 (LTS).
 - Accounting: calendar years, business years, VAT periods, manual entries (+ next reference number), journal
 - Banking: bank accounts
 - Files: list, upload, download, delete
-
-#### API 4.0 (`bexio_lib.Interfaces.V4`)
-- Purchase bills, expenses, outgoing payments
-- Payroll employees and absences
-
-(uuid string ids, edit via PUT)
 
 Entities with write access (`IBexioApiCrudEndpoint`) support `Create`, `Update` and `Delete`; all others `GetById`, `GetAll` and `Search`.
 Resources not covered yet can be added by deriving from `BexioApiCrudEndpoint<T>` / `BexioApiFullEndpoint<T>` with the matching `BexioApiVersion`.
@@ -169,7 +163,7 @@ Full documentation is in [`docs/`](docs/index.md):
 - [Getting started](docs/getting-started.md): install, setup with or without dependency injection
 - [Authentication](docs/authentication.md): personal access token and OAuth2, token store, several bexio accounts
 - [Usage](docs/usage.md): filters and search, paging, create / update / delete, errors, retries, own endpoints
-- [Endpoint reference](docs/endpoints.md): all endpoints of api 2.0, 3.0 and 4.0
+- [Endpoint reference](docs/endpoints.md): all endpoints of api 2.0 and 3.0
 - [Testing](docs/testing.md) and [Releasing](docs/releasing.md)
 
 The package also ships XML documentation for IntelliSense.
