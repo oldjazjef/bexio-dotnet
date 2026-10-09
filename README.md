@@ -162,4 +162,13 @@ Transport behaviour (auth header, url, retry, multipart, paging) is tested again
 - Dependabot keeps NuGet packages and actions up to date.
 
 ### Documentation
-Coming soon
+
+Full documentation is in [`docs/`](docs/index.md):
+
+- [Getting started](docs/getting-started.md): install, setup with or without dependency injection
+- [Authentication](docs/authentication.md): personal access token and OAuth2, token store, several bexio accounts
+- [Usage](docs/usage.md): filters and search, paging, create / update / delete, errors, retries, own endpoints
+- [Endpoint reference](docs/endpoints.md): all endpoints of api 2.0, 3.0 and 4.0
+- [Testing](docs/testing.md) and [Releasing](docs/releasing.md)
+
+The package also ships XML documentation for IntelliSense.
