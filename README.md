@@ -24,8 +24,6 @@ Supports **every operation of the bexio API 2.0 and 3.0** (272 operations). Endp
 
 All operations with their methods and scopes: [docs/endpoints.md](docs/endpoints.md). Method names are the operation ids of the bexio documentation (`ListContacts`, `ShowContact`, `CreateContact`, `EditContact`, ...). Groups with a main collection additionally offer the short forms `GetAll`, `GetById`, `Search`, `Create`, `Update` and `Delete`, and list / search operations offer `...PagesAsync` to read all pages.
 
-> bexio also has an API 4.0 (contacts v2, purchase, payroll, ...). It is not part of this library yet.
-
 If you find something missing or broken, please [report an issue][github-issue] or even better fork the repo and submit a pull request
 
 
@@ -172,7 +170,6 @@ Transport behaviour (auth header, url, retry, multipart, paging) is tested again
 | `client.V2.Offers` | `client.V2.Quotes` |
 | `client.V2.Articles` | `client.V2.Items` |
 | `GetAllPagesAsync()` | `ListContactsPagesAsync()` (per operation) |
-| `client.V4` | removed, API 4.0 is not part of the library |
 
 ### Documentation
 
