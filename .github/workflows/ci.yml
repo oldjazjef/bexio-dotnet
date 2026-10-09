@@ -19,6 +19,11 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Generated code is up to date
+        run: |
+          python3 tools/generate.py
+          git diff --exit-code -- bexio-api docs
+
       - name: Restore
         run: dotnet restore bexio-api/bexio-api.sln
 

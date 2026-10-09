@@ -16,27 +16,12 @@ namespace BexioLibTest.Unit
         public void Invoice_json_is_deserialized()
         {
             const string json = @"{""id"":12,""document_nr"":""RE-0012"",""title"":""Test"",""contact_id"":3,""user_id"":1,
-                ""total_gross"":""119.0000"",""total_net"":""100.0000"",""kb_item_status_id"":9,""mwst_is_net"":true,
-                ""positions"":[{""id"":1,""type"":""KbPositionCustom"",""amount"":""2"",""unit_price"":""50.0"",""text"":""Work""}]}";
+                ""total_gross"":""119.0000"",""total_net"":""100.0000"",""kb_item_status_id"":9,""mwst_is_net"":true}";
             var invoice = JsonConvert.DeserializeObject<BexioInvoice>(json);
             Assert.Equal(12, invoice.id);
             Assert.Equal("RE-0012", invoice.document_nr);
             Assert.Equal("119.0000", invoice.total_gross);
             Assert.Equal(9, invoice.kb_item_status_id);
-            Assert.Single(invoice.positions);
-        }
-
-        [Fact]
-        public void Timesheet_tracking_serializes_without_nulls()
-        {
-            var timesheet = new BexioTimesheet
-            {
-                user_id = 1,
-                tracking = new BexioTimesheetTracking { type = "duration", date = "2024-01-02", duration = "01:30" }
-            };
-            var api = new FakeBexioApi { Content = "{}" };
-            new bexio_lib.Implementation.Endpoints.BexioApiTimesheetEndpoint(api).Create(timesheet);
-            Assert.Equal("{\"user_id\":1,\"tracking\":{\"type\":\"duration\",\"date\":\"2024-01-02\",\"duration\":\"01:30\"}}", api.Body);
         }
 
         [Fact]
@@ -77,7 +62,7 @@ namespace BexioLibTest.Unit
 
             var provider = new ServiceCollection().AddBexioJwt(config).BuildServiceProvider();
             Assert.Equal("https://api.bexio.com", provider.GetRequiredService<IBexioApi>().API_URL);
-            Assert.NotNull(provider.GetRequiredService<IBexioApiInvoiceEndpoint>());
+            Assert.NotNull(provider.GetRequiredService<IBexioApiInvoicesEndpoint>());
         }
 
         [Fact]

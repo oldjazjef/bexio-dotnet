@@ -5,8 +5,8 @@
 Endpoints are interfaces, mock them with any library:
 
 ```csharp
-var contacts = Substitute.For<IBexioApiContactEndpoint>();
-contacts.GetByIdAsync(1).Returns(new BexioContact { id = 1, name_1 = "Muster" });
+var contacts = Substitute.For<IBexioApiContactsEndpoint>();
+contacts.GetByIdAsync(1).Returns(new BexioContactWithDetails { id = 1, name_1 = "Muster" });
 ```
 
 Or fake the transport and keep the real endpoint classes: implement `IBexioApi` (two methods: `Send` and `SendAsync`, they receive a `BexioRequest` with `Resource`, `Query`, `JsonBody`) and return a `BexioResponse`:
@@ -32,5 +32,5 @@ For tests of the HTTP layer pass an `HttpClient` with your own `HttpMessageHandl
 dotnet test bexio-api/bexio-api.sln
 ```
 
-- `BexioLibTest/Unit`: endpoints against a fake transport, transport (url, headers, retry, multipart, paging) against a stubbed `HttpMessageHandler`, OAuth flow, DI wiring.
+- `BexioLibTest/Unit`: every one of the 272 operations against the official OpenAPI description (method, path, async variant), every model against the examples of the description, endpoints against a fake transport, transport (url, headers, retry, multipart, paging) against a stubbed `HttpMessageHandler`, OAuth flow, DI wiring.
 - `BexioLibTest/Integration`: run against the real api, only if the environment variable `bexioApiKey` is set, otherwise they pass without calling anything.

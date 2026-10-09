@@ -1,6 +1,6 @@
 # bexio-dotnet documentation
 
-A .NET client for the [bexio](https://www.bexio.com) API (2.0 and 3.0).
+A .NET client for the [bexio](https://www.bexio.com) API (2.0 and 3.0). Endpoints and models are generated from the official OpenAPI description, see [Development](development.md).
 
 | Guide | Content |
 |---|---|
@@ -8,6 +8,7 @@ A .NET client for the [bexio](https://www.bexio.com) API (2.0 and 3.0).
 | [Authentication](authentication.md) | Personal access token and OAuth2 (apps registered at bexio), token store, several bexio accounts |
 | [Usage](usage.md) | Reading, searching with filters, paging, create / update / delete, errors, retries, extending |
 | [Endpoint reference](endpoints.md) | Every endpoint with interface, api resource and supported operations |
+| [Development](development.md) | How the code is generated, regenerate after a spec change |
 | [Testing](testing.md) | Test code that uses the library; run the library's own tests |
 | [Releasing](releasing.md) | CI, versioning and publishing to NuGet |
 

@@ -12,13 +12,13 @@ var contacts = await client.V2.Contacts.GetAllAsync(new BexioRequestFilter { lim
 ### Paging
 
 ```csharp
-await foreach (var contact in client.V2.Contacts.GetAllPagesAsync(pageSize: 500))
+await foreach (var contact in client.V2.Contacts.ListContactsPagesAsync(pageSize: 500))
 {
     ...
 }
 ```
 
-`GetAllPagesAsync` reads page by page until a page is not full.
+Every list and search operation has a `...PagesAsync` variant (`ListContactsPagesAsync`, `SearchInvoicesPagesAsync`, ...). It reads page by page until a page is not full.
 
 ## Searching
 
@@ -33,7 +33,7 @@ var invoices = await client.V2.Invoices.SearchAsync(filter);
 ```
 
 - Criteria: `BexioFilterCriteria` (`EXACT_MATCH`, `LIKE`, `IN`, `GREATER_THAN`, ...).
-- Field names: `BexioInvoiceFilterFields`, `BexioOrderFilterFields`, `BexioItemFilterFields`, ...
+- Field names: `BexioSearchFields.KbInvoice`, `BexioSearchFields.Contact`, ... (generated from the bexio documentation, one class per search endpoint)
 - Status ids: `BexioInvoiceStatus`, `BexioOrderStatus`, `BexioQuoteStatus`.
 
 ## Create, update, delete
@@ -41,7 +41,7 @@ var invoices = await client.V2.Invoices.SearchAsync(filter);
 Endpoints with write access (see [Endpoint reference](endpoints.md)):
 
 ```csharp
-var created = await client.V2.Contacts.CreateAsync(new BexioContact
+var created = await client.V2.Contacts.CreateAsync(new BexioContactRequest
 {
     contact_type_id = BexioContactTypes.COMPANY,
     name_1 = "Muster AG",
@@ -49,7 +49,7 @@ var created = await client.V2.Contacts.CreateAsync(new BexioContact
     owner_id = 1
 });
 
-await client.V2.Contacts.UpdateAsync(created.id.Value, new BexioContact { name_1 = "Muster GmbH" });
+await client.V2.Contacts.UpdateAsync(created.id.Value, new BexioContactRequest { name_1 = "Muster GmbH" });
 bool deleted = await client.V2.Contacts.DeleteAsync(created.id.Value);
 ```
 
@@ -58,28 +58,28 @@ Properties that are `null` are **not sent**, so an update only changes what you 
 ## Sales documents and actions
 
 ```csharp
-client.V2.Invoices.Issue(id);
-client.V2.Invoices.Send(id, new BexioInvoiceSend { recipient_email = "a@b.ch", subject = "Invoice", message = "..." });
-BexioPdf pdf = client.V2.Invoices.GetPdf(id);       // base64 decoded into pdf.content
+client.V2.Invoices.IssueInvoice(id);
+client.V2.Invoices.SendInvoice(id, new BexioNetworkSendRequest { recipient_email = "a@b.ch", subject = "Invoice", message = "..." });
+BexioDocumentPDF pdf = client.V2.Invoices.ShowInvoicePDF(id, logopaper: 1);    // content is base64
 
-var order   = client.V2.Offers.CreateOrder(offerId);
-var invoice = client.V2.Orders.CreateInvoice(orderId, new BexioOrderInvoiceUpdate());
+var order   = client.V2.Quotes.CreateOrderFromQuote(quoteId, new BexioKbCreateFromDocumentRequest());
+var invoice = client.V2.Orders.CreateInvoiceFromOrder(orderId, new BexioKbCreateFromDocumentRequest());
 ```
 
-Action methods (`Issue`, `Revoke`, `Cancel`, `MarkSent`, `Send`, `GetPdf`, conversions) are synchronous; wrap them in `Task.Run` if you need them off the calling thread.
+Actions return `bool` (the `success` flag of bexio) or the created document. Every action is also available as `...Async`.
 
-Positions of a document:
+Positions and comments of a document. The document type is `kb_offer`, `kb_order` or `kb_invoice`:
 
 ```csharp
-var positions = client.V2.InvoicePositions.GetAll(invoiceId, BexioPositionType.KbPositionCustom);
-client.V2.InvoicePositions.Create(invoiceId, BexioPositionType.KbPositionCustom, new BexioPosition { text = "Work", amount = 2, unit_price = 100 });
+var positions = client.V2.DefaultPositions.ListDefaultPositions("kb_invoice", invoiceId);
+client.V2.DefaultPositions.CreateDefaultPosition("kb_invoice", invoiceId, new BexioPositionCustom { text = "Work", amount = "2", unit_price = "100" });
 ```
 
 ## Files (api 3.0)
 
 ```csharp
-BexioFile file = await client.V3.Files.UploadAsync("contract.pdf", bytes);
-byte[] content = await client.V3.Files.DownloadAsync(file.id.Value);
+var files = await client.V3.Files.CreateFileAsync("contract.pdf", bytes);
+byte[] content = await client.V3.Files.DownloadFileAsync(files.First().id.Value);
 ```
 
 ## Errors

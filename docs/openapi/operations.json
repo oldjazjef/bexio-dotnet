@@ -1,0 +1,4811 @@
+[
+ {
+  "operationId": "v2ListAccountGroups",
+  "http": "GET",
+  "path": "2.0/account_groups",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAccountGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAccountGroupsEndpoint",
+  "method": "ListAccountGroups",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "v2ListAccounts",
+  "http": "GET",
+  "path": "2.0/accounts",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAccountsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAccountsEndpoint",
+  "method": "ListAccounts",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "v2SearchAccounts",
+  "http": "POST",
+  "path": "2.0/accounts/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAccountsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAccountsEndpoint",
+  "method": "SearchAccounts",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "v2ListItems",
+  "http": "GET",
+  "path": "2.0/article",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "ListItems",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "article_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateItem",
+  "http": "POST",
+  "path": "2.0/article",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "CreateItem",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "article_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchItems",
+  "http": "POST",
+  "path": "2.0/article/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "SearchItems",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "article_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowItem",
+  "http": "GET",
+  "path": "2.0/article/{article_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "ShowItem",
+  "alias": "GetById",
+  "pathParams": [
+   "articleId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "article_show"
+  ]
+ },
+ {
+  "operationId": "v2EditItem",
+  "http": "POST",
+  "path": "2.0/article/{article_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "EditItem",
+  "alias": "Update",
+  "pathParams": [
+   "articleId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "article_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteItem",
+  "http": "DELETE",
+  "path": "2.0/article/{article_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemsEndpoint",
+  "method": "DeleteItem",
+  "alias": "Delete",
+  "pathParams": [
+   "articleId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "article_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListBusinessActivities",
+  "http": "GET",
+  "path": "2.0/client_service",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiBusinessActivitiesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiBusinessActivitiesEndpoint",
+  "method": "ListBusinessActivities",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateBusinessActivity",
+  "http": "POST",
+  "path": "2.0/client_service",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiBusinessActivitiesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiBusinessActivitiesEndpoint",
+  "method": "CreateBusinessActivity",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchBusinessActivities",
+  "http": "POST",
+  "path": "2.0/client_service/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiBusinessActivitiesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiBusinessActivitiesEndpoint",
+  "method": "SearchBusinessActivities",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListCommunicationTypes",
+  "http": "GET",
+  "path": "2.0/communication_kind",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCommunicationTypesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCommunicationTypesEndpoint",
+  "method": "ListCommunicationTypes",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchCommunicationTypes",
+  "http": "POST",
+  "path": "2.0/communication_kind/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCommunicationTypesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCommunicationTypesEndpoint",
+  "method": "SearchCommunicationTypes",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListCompanyProfile",
+  "http": "GET",
+  "path": "2.0/company_profile",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCompanyProfileEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCompanyProfileEndpoint",
+  "method": "ListCompanyProfile",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowCompanyProfile",
+  "http": "GET",
+  "path": "2.0/company_profile/{profile_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCompanyProfileEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCompanyProfileEndpoint",
+  "method": "ShowCompanyProfile",
+  "alias": "GetById",
+  "pathParams": [
+   "profileId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListContacts",
+  "http": "GET",
+  "path": "2.0/contact",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "ListContacts",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateContact",
+  "http": "POST",
+  "path": "2.0/contact",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "CreateContact",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2BulkCreateContacts",
+  "http": "POST",
+  "path": "2.0/contact/_bulk_create",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "BulkCreateContacts",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchContact",
+  "http": "POST",
+  "path": "2.0/contact/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "SearchContact",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowContact",
+  "http": "GET",
+  "path": "2.0/contact/{contact_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "ShowContact",
+  "alias": "GetById",
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2EditContact",
+  "http": "POST",
+  "path": "2.0/contact/{contact_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "EditContact",
+  "alias": "Update",
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2DeleteContact",
+  "http": "DELETE",
+  "path": "2.0/contact/{contact_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "DeleteContact",
+  "alias": "Delete",
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2RestoreContact",
+  "http": "PATCH",
+  "path": "2.0/contact/{contact_id}/restore",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactsEndpoint",
+  "method": "RestoreContact",
+  "alias": null,
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListAdditionalAddresses",
+  "http": "GET",
+  "path": "2.0/contact/{contact_id}/additional_address",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "ListAdditionalAddresses",
+  "alias": null,
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateAdditionalAddress",
+  "http": "POST",
+  "path": "2.0/contact/{contact_id}/additional_address",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "CreateAdditionalAddress",
+  "alias": null,
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchAdditionalAddresses",
+  "http": "POST",
+  "path": "2.0/contact/{contact_id}/additional_address/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "SearchAdditionalAddresses",
+  "alias": null,
+  "pathParams": [
+   "contactId"
+  ],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowAdditionalAddress",
+  "http": "GET",
+  "path": "2.0/contact/{contact_id}/additional_address/{additional_address_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "ShowAdditionalAddress",
+  "alias": null,
+  "pathParams": [
+   "contactId",
+   "additionalAddressId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2EditAdditionalAddress",
+  "http": "POST",
+  "path": "2.0/contact/{contact_id}/additional_address/{additional_address_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "EditAdditionalAddress",
+  "alias": null,
+  "pathParams": [
+   "contactId",
+   "additionalAddressId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2DeleteAdditionalAddress",
+  "http": "DELETE",
+  "path": "2.0/contact/{contact_id}/additional_address/{additional_address_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiAdditionalAddressesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiAdditionalAddressesEndpoint",
+  "method": "DeleteAdditionalAddress",
+  "alias": null,
+  "pathParams": [
+   "contactId",
+   "additionalAddressId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListContactSectors",
+  "http": "GET",
+  "path": "2.0/contact_branch",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactSectorsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactSectorsEndpoint",
+  "method": "ListContactSectors",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchContactSectors",
+  "http": "POST",
+  "path": "2.0/contact_branch/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactSectorsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactSectorsEndpoint",
+  "method": "SearchContactSectors",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListContactGroups",
+  "http": "GET",
+  "path": "2.0/contact_group",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "ListContactGroups",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateContactGroup",
+  "http": "POST",
+  "path": "2.0/contact_group",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "CreateContactGroup",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchContactGroups",
+  "http": "POST",
+  "path": "2.0/contact_group/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "SearchContactGroups",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowContactGroup",
+  "http": "GET",
+  "path": "2.0/contact_group/{contact_group_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "ShowContactGroup",
+  "alias": "GetById",
+  "pathParams": [
+   "contactGroupId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2EditContactGroup",
+  "http": "POST",
+  "path": "2.0/contact_group/{contact_group_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "EditContactGroup",
+  "alias": "Update",
+  "pathParams": [
+   "contactGroupId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2DeleteContactGroup",
+  "http": "DELETE",
+  "path": "2.0/contact_group/{contact_group_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactGroupsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactGroupsEndpoint",
+  "method": "DeleteContactGroup",
+  "alias": "Delete",
+  "pathParams": [
+   "contactGroupId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListContactRelations",
+  "http": "GET",
+  "path": "2.0/contact_relation",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "ListContactRelations",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateContactRelation",
+  "http": "POST",
+  "path": "2.0/contact_relation",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "CreateContactRelation",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchContactRelations",
+  "http": "POST",
+  "path": "2.0/contact_relation/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "SearchContactRelations",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowContactRelation",
+  "http": "GET",
+  "path": "2.0/contact_relation/{contact_relation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "ShowContactRelation",
+  "alias": "GetById",
+  "pathParams": [
+   "contactRelationId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "contact_show"
+  ]
+ },
+ {
+  "operationId": "v2EditContactRelation",
+  "http": "POST",
+  "path": "2.0/contact_relation/{contact_relation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "EditContactRelation",
+  "alias": "Update",
+  "pathParams": [
+   "contactRelationId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2DeleteContactRelation",
+  "http": "DELETE",
+  "path": "2.0/contact_relation/{contact_relation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiContactRelationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiContactRelationsEndpoint",
+  "method": "DeleteContactRelation",
+  "alias": "Delete",
+  "pathParams": [
+   "contactRelationId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "contact_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListCountries",
+  "http": "GET",
+  "path": "2.0/country",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "ListCountries",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateCountry",
+  "http": "POST",
+  "path": "2.0/country",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "CreateCountry",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchCountries",
+  "http": "POST",
+  "path": "2.0/country/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "SearchCountries",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowCountry",
+  "http": "GET",
+  "path": "2.0/country/{country_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "ShowCountry",
+  "alias": "GetById",
+  "pathParams": [
+   "countryId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2EditCountry",
+  "http": "POST",
+  "path": "2.0/country/{country_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "EditCountry",
+  "alias": "Update",
+  "pathParams": [
+   "countryId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "DeleteCountry",
+  "http": "DELETE",
+  "path": "2.0/country/{country_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCountriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCountriesEndpoint",
+  "method": "DeleteCountry",
+  "alias": "Delete",
+  "pathParams": [
+   "countryId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListDeliveries",
+  "http": "GET",
+  "path": "2.0/kb_delivery",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDeliveriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDeliveriesEndpoint",
+  "method": "ListDeliveries",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_delivery_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowDelivery",
+  "http": "GET",
+  "path": "2.0/kb_delivery/{delivery_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDeliveriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDeliveriesEndpoint",
+  "method": "ShowDelivery",
+  "alias": "GetById",
+  "pathParams": [
+   "deliveryId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_delivery_show"
+  ]
+ },
+ {
+  "operationId": "v2IssueDelivery",
+  "http": "POST",
+  "path": "2.0/kb_delivery/{delivery_id}/issue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDeliveriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDeliveriesEndpoint",
+  "method": "IssueDelivery",
+  "alias": null,
+  "pathParams": [
+   "deliveryId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_delivery_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListInvoices",
+  "http": "GET",
+  "path": "2.0/kb_invoice",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ListInvoices",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "CreateInvoice",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchInvoices",
+  "http": "POST",
+  "path": "2.0/kb_invoice/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "SearchInvoices",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowInvoice",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ShowInvoice",
+  "alias": "GetById",
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2EditInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "EditInvoice",
+  "alias": "Update",
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteInvoice",
+  "http": "DELETE",
+  "path": "2.0/kb_invoice/{invoice_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "DeleteInvoice",
+  "alias": "Delete",
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2CancelInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/cancel",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "CancelInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2CopyInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/copy",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "CopyInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2IssueInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/issue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "IssueInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListInvoiceReminders",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ListInvoiceReminders",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateInvoiceReminder",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "CreateInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchReminders",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "SearchReminders",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowInvoiceReminder",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ShowInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteInvoiceReminder",
+  "http": "DELETE",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "DeleteInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2RMarkAsSentInvoiceReminder",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}/mark_as_sent",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "MarkAsSentInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2RMarkAsUnsentInvoiceReminder",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}/mark_as_unsent",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "MarkAsUnsentInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowInvoiceReminderPDF",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}/pdf",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ShowInvoiceReminderPDF",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId",
+   "logopaper"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2SendInvoiceReminder",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/kb_reminder/{reminder_id}/send",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "SendInvoiceReminder",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "reminderId"
+  ],
+  "bodyKind": "json",
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2RMarkAsSentInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/mark_as_sent",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "MarkAsSentInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListInvoicePayments",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/payment",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ListInvoicePayments",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateInvoicePayment",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/payment",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "CreateInvoicePayment",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowInvoicePayment",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/payment/{payment_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ShowInvoicePayment",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "paymentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "DeleteInvoicePayment",
+  "http": "DELETE",
+  "path": "2.0/kb_invoice/{invoice_id}/payment/{payment_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "DeleteInvoicePayment",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "paymentId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowInvoicePDF",
+  "http": "GET",
+  "path": "2.0/kb_invoice/{invoice_id}/pdf",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "ShowInvoicePDF",
+  "alias": null,
+  "pathParams": [
+   "invoiceId",
+   "logopaper"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show"
+  ]
+ },
+ {
+  "operationId": "v2RevertIssueInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/revert_issue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "RevertIssueInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2SendInvoice",
+  "http": "POST",
+  "path": "2.0/kb_invoice/{invoice_id}/send",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiInvoicesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiInvoicesEndpoint",
+  "method": "SendInvoice",
+  "alias": null,
+  "pathParams": [
+   "invoiceId"
+  ],
+  "bodyKind": "json",
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListDocumentSettings",
+  "http": "GET",
+  "path": "2.0/kb_item_setting",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDocumentSettingsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDocumentSettingsEndpoint",
+  "method": "ListDocumentSettings",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListQuotes",
+  "http": "GET",
+  "path": "2.0/kb_offer",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "ListQuotes",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_offer_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "CreateQuote",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchQuotes",
+  "http": "POST",
+  "path": "2.0/kb_offer/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "SearchQuotes",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "kb_offer_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowQuote",
+  "http": "GET",
+  "path": "2.0/kb_offer/{quote_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "ShowQuote",
+  "alias": "GetById",
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_offer_show"
+  ]
+ },
+ {
+  "operationId": "v2EditQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "EditQuote",
+  "alias": "Update",
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteQuote",
+  "http": "DELETE",
+  "path": "2.0/kb_offer/{quote_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "DeleteQuote",
+  "alias": "Delete",
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2AcceptQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/accept",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "AcceptQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2CopyQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/copy",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "CopyQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2CreateInvoiceFromQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/invoice",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "CreateInvoiceFromQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2IssueQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/issue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "IssueQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2RMarkAsSentQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/mark_as_sent",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "MarkAsSentQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2CreateOrderFromQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/order",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "CreateOrderFromQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowQuotePDF",
+  "http": "GET",
+  "path": "2.0/kb_offer/{quote_id}/pdf",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "ShowQuotePDF",
+  "alias": null,
+  "pathParams": [
+   "quoteId",
+   "logopaper"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_offer_show"
+  ]
+ },
+ {
+  "operationId": "v2ReissueQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/reissue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "ReissueQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2DeclineQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/reject",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "DeclineQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2RevertIssueQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/revertIssue",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "RevertIssueQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2SendQuote",
+  "http": "POST",
+  "path": "2.0/kb_offer/{quote_id}/send",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiQuotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiQuotesEndpoint",
+  "method": "SendQuote",
+  "alias": null,
+  "pathParams": [
+   "quoteId"
+  ],
+  "bodyKind": "json",
+  "returns": "bool",
+  "scopes": [
+   "kb_offer_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListOrders",
+  "http": "GET",
+  "path": "2.0/kb_order",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "ListOrders",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateOrder",
+  "http": "POST",
+  "path": "2.0/kb_order",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "CreateOrder",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchOrders",
+  "http": "POST",
+  "path": "2.0/kb_order/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "SearchOrders",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowOrder",
+  "http": "GET",
+  "path": "2.0/kb_order/{order_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "ShowOrder",
+  "alias": "GetById",
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditOrder",
+  "http": "POST",
+  "path": "2.0/kb_order/{order_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "EditOrder",
+  "alias": "Update",
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteOrder",
+  "http": "DELETE",
+  "path": "2.0/kb_order/{order_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "DeleteOrder",
+  "alias": "Delete",
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2CreateDeliveryFromOrder",
+  "http": "POST",
+  "path": "2.0/kb_order/{order_id}/delivery",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "CreateDeliveryFromOrder",
+  "alias": null,
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_delivery_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2CreateInvoiceFromOrder",
+  "http": "POST",
+  "path": "2.0/kb_order/{order_id}/invoice",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "CreateInvoiceFromOrder",
+  "alias": null,
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowOrderPDF",
+  "http": "GET",
+  "path": "2.0/kb_order/{order_id}/pdf",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "ShowOrderPDF",
+  "alias": null,
+  "pathParams": [
+   "orderId",
+   "logopaper"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowOrderRepetition",
+  "http": "GET",
+  "path": "2.0/kb_order/{order_id}/repetition",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "ShowOrderRepetition",
+  "alias": null,
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditOrderRepetition",
+  "http": "POST",
+  "path": "2.0/kb_order/{order_id}/repetition",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "EditOrderRepetition",
+  "alias": null,
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteOrderRepetition",
+  "http": "DELETE",
+  "path": "2.0/kb_order/{order_id}/repetition",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiOrdersEndpoint",
+  "method": "DeleteOrderRepetition",
+  "alias": null,
+  "pathParams": [
+   "orderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListLanguages",
+  "http": "GET",
+  "path": "2.0/language",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiLanguagesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiLanguagesEndpoint",
+  "method": "ListLanguages",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchLanguages",
+  "http": "POST",
+  "path": "2.0/language/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiLanguagesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiLanguagesEndpoint",
+  "method": "SearchLanguages",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListNotes",
+  "http": "GET",
+  "path": "2.0/note",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "ListNotes",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "note_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateNote",
+  "http": "POST",
+  "path": "2.0/note",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "CreateNote",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "note_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchNotes",
+  "http": "POST",
+  "path": "2.0/note/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "SearchNotes",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "note_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowNote",
+  "http": "GET",
+  "path": "2.0/note/{note_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "ShowNote",
+  "alias": "GetById",
+  "pathParams": [
+   "noteId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "note_show"
+  ]
+ },
+ {
+  "operationId": "v2EditNote",
+  "http": "POST",
+  "path": "2.0/note/{note_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "EditNote",
+  "alias": "Update",
+  "pathParams": [
+   "noteId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "note_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteNote",
+  "http": "DELETE",
+  "path": "2.0/note/{note_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiNotesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiNotesEndpoint",
+  "method": "DeleteNote",
+  "alias": "Delete",
+  "pathParams": [
+   "noteId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "note_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListPaymentTypes",
+  "http": "GET",
+  "path": "2.0/payment_type",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPaymentTypesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPaymentTypesEndpoint",
+  "method": "ListPaymentTypes",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchPaymentTypes",
+  "http": "POST",
+  "path": "2.0/payment_type/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPaymentTypesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPaymentTypesEndpoint",
+  "method": "SearchPaymentTypes",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListProjects",
+  "http": "GET",
+  "path": "2.0/pr_project",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "ListProjects",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateProject",
+  "http": "POST",
+  "path": "2.0/pr_project",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "CreateProject",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchProjects",
+  "http": "POST",
+  "path": "2.0/pr_project/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "SearchProjects",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowProject",
+  "http": "GET",
+  "path": "2.0/pr_project/{project_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "ShowProject",
+  "alias": "GetById",
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "v2EditProject",
+  "http": "POST",
+  "path": "2.0/pr_project/{project_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "EditProject",
+  "alias": "Update",
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteProject",
+  "http": "DELETE",
+  "path": "2.0/pr_project/{project_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "DeleteProject",
+  "alias": "Delete",
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "v2ArchiveProject",
+  "http": "POST",
+  "path": "2.0/pr_project/{project_id}/archive",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "ArchiveProject",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "v2UnarchiveProject",
+  "http": "POST",
+  "path": "2.0/pr_project/{project_id}/reactivate",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "UnarchiveProject",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListProjectStatus",
+  "http": "GET",
+  "path": "2.0/pr_project_state",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "ListProjectStatus",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListProjectType",
+  "http": "GET",
+  "path": "2.0/pr_project_type",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiProjectsEndpoint",
+  "method": "ListProjectType",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListSalutations",
+  "http": "GET",
+  "path": "2.0/salutation",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "ListSalutations",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateSalutation",
+  "http": "POST",
+  "path": "2.0/salutation",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "CreateSalutation",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchSalutations",
+  "http": "POST",
+  "path": "2.0/salutation/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "SearchSalutations",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowSalutation",
+  "http": "GET",
+  "path": "2.0/salutation/{salutation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "ShowSalutation",
+  "alias": "GetById",
+  "pathParams": [
+   "salutationId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2EditSalutation",
+  "http": "POST",
+  "path": "2.0/salutation/{salutation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "EditSalutation",
+  "alias": "Update",
+  "pathParams": [
+   "salutationId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2DeleteSalutation",
+  "http": "DELETE",
+  "path": "2.0/salutation/{salutation_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSalutationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSalutationsEndpoint",
+  "method": "DeleteSalutation",
+  "alias": "Delete",
+  "pathParams": [
+   "salutationId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListStockLocations",
+  "http": "GET",
+  "path": "2.0/stock",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiStockLocationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiStockLocationsEndpoint",
+  "method": "ListStockLocations",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "stock_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchStockLocations",
+  "http": "POST",
+  "path": "2.0/stock/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiStockLocationsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiStockLocationsEndpoint",
+  "method": "SearchStockLocations",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "stock_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListStockAreas",
+  "http": "GET",
+  "path": "2.0/stock_place",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiStockAreasEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiStockAreasEndpoint",
+  "method": "ListStockAreas",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "stock_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchStockAreas",
+  "http": "POST",
+  "path": "2.0/stock_place/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiStockAreasEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiStockAreasEndpoint",
+  "method": "SearchStockAreas",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "stock_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListTasks",
+  "http": "GET",
+  "path": "2.0/task",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "ListTasks",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateTask",
+  "http": "POST",
+  "path": "2.0/task",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "CreateTask",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "task_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchTasks",
+  "http": "POST",
+  "path": "2.0/task/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "SearchTasks",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowTask",
+  "http": "GET",
+  "path": "2.0/task/{task_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "ShowTask",
+  "alias": "GetById",
+  "pathParams": [
+   "taskId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "v2EditTask",
+  "http": "POST",
+  "path": "2.0/task/{task_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "EditTask",
+  "alias": "Update",
+  "pathParams": [
+   "taskId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "DeleteTask",
+  "http": "DELETE",
+  "path": "2.0/task/{task_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "DeleteTask",
+  "alias": "Delete",
+  "pathParams": [
+   "taskId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "task_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListTaskPriorities",
+  "http": "GET",
+  "path": "2.0/todo_priority",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "ListTaskPriorities",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "v2ListTaskStatus",
+  "http": "GET",
+  "path": "2.0/todo_status",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTasksEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTasksEndpoint",
+  "method": "ListTaskStatus",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "task_show"
+  ]
+ },
+ {
+  "operationId": "v2ListTimesheets",
+  "http": "GET",
+  "path": "2.0/timesheet",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "ListTimesheets",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "monitoring_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateTimesheet",
+  "http": "POST",
+  "path": "2.0/timesheet",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "CreateTimesheet",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "monitoring_edit"
+  ]
+ },
+ {
+  "operationId": "v2SearchTimesheets",
+  "http": "POST",
+  "path": "2.0/timesheet/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "SearchTimesheets",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "monitoring_show"
+  ]
+ },
+ {
+  "operationId": "v2ShowTimesheet",
+  "http": "GET",
+  "path": "2.0/timesheet/{timesheet_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "ShowTimesheet",
+  "alias": "GetById",
+  "pathParams": [
+   "timesheetId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "monitoring_show"
+  ]
+ },
+ {
+  "operationId": "v2EditTimesheet",
+  "http": "POST",
+  "path": "2.0/timesheet/{timesheet_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "EditTimesheet",
+  "alias": "Update",
+  "pathParams": [
+   "timesheetId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "monitoring_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteTimesheet",
+  "http": "DELETE",
+  "path": "2.0/timesheet/{timesheet_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "DeleteTimesheet",
+  "alias": "Delete",
+  "pathParams": [
+   "timesheetId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "monitoring_edit"
+  ]
+ },
+ {
+  "operationId": "v2ListTimeSheetStatus",
+  "http": "GET",
+  "path": "2.0/timesheet_status",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTimesheetsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTimesheetsEndpoint",
+  "method": "ListTimeSheetStatus",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListTitles",
+  "http": "GET",
+  "path": "2.0/title",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "ListTitles",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateTitle",
+  "http": "POST",
+  "path": "2.0/title",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "CreateTitle",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchTitles",
+  "http": "POST",
+  "path": "2.0/title/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "SearchTitles",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowTitle",
+  "http": "GET",
+  "path": "2.0/title/{title_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "ShowTitle",
+  "alias": "GetById",
+  "pathParams": [
+   "titleId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2EditTitle",
+  "http": "POST",
+  "path": "2.0/title/{title_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "EditTitle",
+  "alias": "Update",
+  "pathParams": [
+   "titleId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2DeleteTitle",
+  "http": "DELETE",
+  "path": "2.0/title/{title_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTitlesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTitlesEndpoint",
+  "method": "DeleteTitle",
+  "alias": "Delete",
+  "pathParams": [
+   "titleId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListUnits",
+  "http": "GET",
+  "path": "2.0/unit",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "ListUnits",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2CreateUnit",
+  "http": "POST",
+  "path": "2.0/unit",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "CreateUnit",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2SearchUnits",
+  "http": "POST",
+  "path": "2.0/unit/search",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "SearchUnits",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ShowUnit",
+  "http": "GET",
+  "path": "2.0/unit/{unit_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "ShowUnit",
+  "alias": "GetById",
+  "pathParams": [
+   "unitId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2EditUnit",
+  "http": "POST",
+  "path": "2.0/unit/{unit_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "EditUnit",
+  "alias": "Update",
+  "pathParams": [
+   "unitId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2DeleteUnit",
+  "http": "DELETE",
+  "path": "2.0/unit/{unit_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiUnitsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiUnitsEndpoint",
+  "method": "DeleteUnit",
+  "alias": "Delete",
+  "pathParams": [
+   "unitId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v2ListComments",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/comment",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCommentsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCommentsEndpoint",
+  "method": "ListComments",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateComment",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/comment",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCommentsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCommentsEndpoint",
+  "method": "CreateComment",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowComment",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/comment/{comment_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiCommentsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiCommentsEndpoint",
+  "method": "ShowComment",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "commentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListItemPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_article",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemPositionsEndpoint",
+  "method": "ListItemPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateItemPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_article",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemPositionsEndpoint",
+  "method": "CreateItemPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowItemPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_article/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemPositionsEndpoint",
+  "method": "ShowItemPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditItemPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_article/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemPositionsEndpoint",
+  "method": "EditItemPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteItemPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_article/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiItemPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiItemPositionsEndpoint",
+  "method": "DeleteItemPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListDefaultPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_custom",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDefaultPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDefaultPositionsEndpoint",
+  "method": "ListDefaultPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateDefaultPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_custom",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDefaultPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDefaultPositionsEndpoint",
+  "method": "CreateDefaultPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowDefaultPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_custom/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDefaultPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDefaultPositionsEndpoint",
+  "method": "ShowDefaultPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditDefaultPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_custom/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDefaultPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDefaultPositionsEndpoint",
+  "method": "EditDefaultPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteDefaultPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_custom/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDefaultPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDefaultPositionsEndpoint",
+  "method": "DeleteDefaultPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListDiscountPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_discount",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDiscountPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDiscountPositionsEndpoint",
+  "method": "ListDiscountPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateDiscountPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_discount",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDiscountPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDiscountPositionsEndpoint",
+  "method": "CreateDiscountPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowDiscountPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_discount/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDiscountPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDiscountPositionsEndpoint",
+  "method": "ShowDiscountPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditDiscountPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_discount/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDiscountPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDiscountPositionsEndpoint",
+  "method": "EditDiscountPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteDiscountPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_discount/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiDiscountPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiDiscountPositionsEndpoint",
+  "method": "DeleteDiscountPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListPagebreakPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_pagebreak",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPagebreakPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPagebreakPositionsEndpoint",
+  "method": "ListPagebreakPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreatePagebreakPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_pagebreak",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPagebreakPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPagebreakPositionsEndpoint",
+  "method": "CreatePagebreakPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowPagebreakPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_pagebreak/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPagebreakPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPagebreakPositionsEndpoint",
+  "method": "ShowPagebreakPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditPagebreakPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_pagebreak/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPagebreakPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPagebreakPositionsEndpoint",
+  "method": "EditPagebreakPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeletePagebreakPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_pagebreak/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiPagebreakPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiPagebreakPositionsEndpoint",
+  "method": "DeletePagebreakPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListSubpositionPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subposition",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubPositionsEndpoint",
+  "method": "ListSubpositionPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateSubpositionPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subposition",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubPositionsEndpoint",
+  "method": "CreateSubpositionPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowSubpositionPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subposition/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubPositionsEndpoint",
+  "method": "ShowSubpositionPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditSubpositionPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subposition/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubPositionsEndpoint",
+  "method": "EditSubpositionPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteSubpositionPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subposition/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubPositionsEndpoint",
+  "method": "DeleteSubpositionPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListSubtotalPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subtotal",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubtotalPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubtotalPositionsEndpoint",
+  "method": "ListSubtotalPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateSubtotalPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subtotal",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubtotalPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubtotalPositionsEndpoint",
+  "method": "CreateSubtotalPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowSubtotalPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subtotal/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubtotalPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubtotalPositionsEndpoint",
+  "method": "ShowSubtotalPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditSubtotalPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subtotal/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubtotalPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubtotalPositionsEndpoint",
+  "method": "EditSubtotalPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteSubtotalPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_subtotal/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiSubtotalPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiSubtotalPositionsEndpoint",
+  "method": "DeleteSubtotalPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2ListTextPositions",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_text",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTextPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTextPositionsEndpoint",
+  "method": "ListTextPositions",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2CreateTextPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_text",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTextPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTextPositionsEndpoint",
+  "method": "CreateTextPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_edit",
+   "kb_offer_edit",
+   "kb_order_edit"
+  ]
+ },
+ {
+  "operationId": "v2ShowTextPosition",
+  "http": "GET",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_text/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTextPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTextPositionsEndpoint",
+  "method": "ShowTextPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2EditTextPosition",
+  "http": "POST",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_text/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTextPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTextPositionsEndpoint",
+  "method": "EditTextPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "v2DeleteTextPosition",
+  "http": "DELETE",
+  "path": "2.0/{kb_document_type}/{document_id}/kb_position_text/{position_id}",
+  "version": "2.0",
+  "interface": "bexio_lib.Interfaces.IBexioApiTextPositionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.BexioApiTextPositionsEndpoint",
+  "method": "DeleteTextPosition",
+  "alias": null,
+  "pathParams": [
+   "kbDocumentType",
+   "documentId",
+   "positionId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_invoice_show",
+   "kb_offer_show",
+   "kb_order_show"
+  ]
+ },
+ {
+  "operationId": "ListBusinessYears",
+  "http": "GET",
+  "path": "3.0/accounting/business_years",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiBusinessYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiBusinessYearsEndpoint",
+  "method": "ListBusinessYears",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowBusinessYear",
+  "http": "GET",
+  "path": "3.0/accounting/business_years/{business_year_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiBusinessYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiBusinessYearsEndpoint",
+  "method": "ShowBusinessYear",
+  "alias": "GetById",
+  "pathParams": [
+   "businessYearId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ListCalendarYears",
+  "http": "GET",
+  "path": "3.0/accounting/calendar_years",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCalendarYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCalendarYearsEndpoint",
+  "method": "ListCalendarYears",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "CreateCalendarYear",
+  "http": "POST",
+  "path": "3.0/accounting/calendar_years",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCalendarYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCalendarYearsEndpoint",
+  "method": "CreateCalendarYear",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "SearchCalendarYears",
+  "http": "POST",
+  "path": "3.0/accounting/calendar_years/search",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCalendarYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCalendarYearsEndpoint",
+  "method": "SearchCalendarYears",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowCalendarYear",
+  "http": "GET",
+  "path": "3.0/accounting/calendar_years/{calendar_year_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCalendarYearsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCalendarYearsEndpoint",
+  "method": "ShowCalendarYear",
+  "alias": "GetById",
+  "pathParams": [
+   "calendarYearId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ListJournalEntries",
+  "http": "GET",
+  "path": "3.0/accounting/journal",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiReportsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiReportsEndpoint",
+  "method": "ListJournalEntries",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "accounting"
+  ]
+ },
+ {
+  "operationId": "ListManualEntries",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "ListManualEntries",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "accounting"
+  ]
+ },
+ {
+  "operationId": "CreateManualEntry",
+  "http": "POST",
+  "path": "3.0/accounting/manual_entries",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "CreateManualEntry",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "accounting"
+  ]
+ },
+ {
+  "operationId": "GetNextReferenceNumber",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries/next_ref_nr",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "GetNextReferenceNumber",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "accounting"
+  ]
+ },
+ {
+  "operationId": "UpdateManualEntry",
+  "http": "PUT",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "UpdateManualEntry",
+  "alias": "Update",
+  "pathParams": [
+   "manualEntryId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "accounting"
+  ]
+ },
+ {
+  "operationId": "DeleteManualEntry",
+  "http": "DELETE",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "DeleteManualEntry",
+  "alias": "Delete",
+  "pathParams": [
+   "manualEntryId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": []
+ },
+ {
+  "operationId": "ListManualEntryFiles",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/entries/{entry_id}/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "ListManualEntryFiles",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "entryId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "UploadManualEntryFile",
+  "http": "POST",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/entries/{entry_id}/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "UploadManualEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "entryId"
+  ],
+  "bodyKind": "file",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowManualEntryFile",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/entries/{entry_id}/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "ShowManualEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "entryId",
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "DeleteManualEntryFile",
+  "http": "DELETE",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/entries/{entry_id}/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "DeleteManualEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "entryId",
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": []
+ },
+ {
+  "operationId": "ListManualCompoundEntryFiles",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "ListManualCompoundEntryFiles",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "UploadManualCompoundEntryFile",
+  "http": "POST",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "UploadManualCompoundEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId"
+  ],
+  "bodyKind": "file",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowManualCompoundEntryFile",
+  "http": "GET",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "ShowManualCompoundEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "DeleteManualCompoundEntryFile",
+  "http": "DELETE",
+  "path": "3.0/accounting/manual_entries/{manual_entry_id}/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiManualEntriesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiManualEntriesEndpoint",
+  "method": "DeleteManualCompoundEntryFile",
+  "alias": null,
+  "pathParams": [
+   "manualEntryId",
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": []
+ },
+ {
+  "operationId": "ListVatPeriods",
+  "http": "GET",
+  "path": "3.0/accounting/vat_periods",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiVatPeriodsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiVatPeriodsEndpoint",
+  "method": "ListVatPeriods",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowVatPeriod",
+  "http": "GET",
+  "path": "3.0/accounting/vat_periods/{vat_period_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiVatPeriodsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiVatPeriodsEndpoint",
+  "method": "ShowVatPeriod",
+  "alias": "GetById",
+  "pathParams": [
+   "vatPeriodId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ListBankAccounts",
+  "http": "GET",
+  "path": "3.0/banking/accounts",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiBankAccountsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiBankAccountsEndpoint",
+  "method": "ListBankAccounts",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "bank_account_show"
+  ]
+ },
+ {
+  "operationId": "ShowBankAccount",
+  "http": "GET",
+  "path": "3.0/banking/accounts/{bank_account_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiBankAccountsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiBankAccountsEndpoint",
+  "method": "ShowBankAccount",
+  "alias": "GetById",
+  "pathParams": [
+   "bankAccountId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "bank_account_show"
+  ]
+ },
+ {
+  "operationId": "ListCurrencies",
+  "http": "GET",
+  "path": "3.0/currencies",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "ListCurrencies",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "CreateCurrency",
+  "http": "POST",
+  "path": "3.0/currencies",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "CreateCurrency",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ListCurrenciesCodes",
+  "http": "GET",
+  "path": "3.0/currencies/codes",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "ListCurrenciesCodes",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowCurrency",
+  "http": "GET",
+  "path": "3.0/currencies/{currency_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "ShowCurrency",
+  "alias": "GetById",
+  "pathParams": [
+   "currencyId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "UpdateCurrency",
+  "http": "PATCH",
+  "path": "3.0/currencies/{currency_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "UpdateCurrency",
+  "alias": "Update",
+  "pathParams": [
+   "currencyId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "DeleteCurrency",
+  "http": "DELETE",
+  "path": "3.0/currencies/{currency_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "DeleteCurrency",
+  "alias": "Delete",
+  "pathParams": [
+   "currencyId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": []
+ },
+ {
+  "operationId": "ListExchangeRatesForCurrency",
+  "http": "GET",
+  "path": "3.0/currencies/{currency_id}/exchange_rates",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiCurrenciesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiCurrenciesEndpoint",
+  "method": "ListExchangeRatesForCurrency",
+  "alias": null,
+  "pathParams": [
+   "currencyId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "v3ListDocumentTemplate",
+  "http": "GET",
+  "path": "3.0/document_templates",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiDocumentTemplatesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiDocumentTemplatesEndpoint",
+  "method": "ListDocumentTemplate",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "v3ListFictionalUsers",
+  "http": "GET",
+  "path": "3.0/fictional_users",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "ListFictionalUsers",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3CreateFictionalUser",
+  "http": "POST",
+  "path": "3.0/fictional_users",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "CreateFictionalUser",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3ShowFictionalUser",
+  "http": "GET",
+  "path": "3.0/fictional_users/{fictional_user_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "ShowFictionalUser",
+  "alias": "GetById",
+  "pathParams": [
+   "fictionalUserId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3UpdateFictionalUser",
+  "http": "PATCH",
+  "path": "3.0/fictional_users/{fictional_user_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "UpdateFictionalUser",
+  "alias": "Update",
+  "pathParams": [
+   "fictionalUserId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3DeleteFictionalUser",
+  "http": "DELETE",
+  "path": "3.0/fictional_users/{fictional_user_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "DeleteFictionalUser",
+  "alias": "Delete",
+  "pathParams": [
+   "fictionalUserId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3ListUsers",
+  "http": "GET",
+  "path": "3.0/users",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "ListUsers",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3ShowMe",
+  "http": "GET",
+  "path": "3.0/users/me",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "ShowMe",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3ShowUser",
+  "http": "GET",
+  "path": "3.0/users/{user_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiUserManagementEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiUserManagementEndpoint",
+  "method": "ShowUser",
+  "alias": null,
+  "pathParams": [
+   "userId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "v3ReadFiles",
+  "http": "GET",
+  "path": "3.0/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "ReadFiles",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3CreateFile",
+  "http": "POST",
+  "path": "3.0/files",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "CreateFile",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": "file",
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3SearchFile",
+  "http": "POST",
+  "path": "3.0/files/search",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "SearchFile",
+  "alias": "Search",
+  "pathParams": [],
+  "bodyKind": "search",
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3ReadFile",
+  "http": "GET",
+  "path": "3.0/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "ReadFile",
+  "alias": "GetById",
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3UpdateFile",
+  "http": "PATCH",
+  "path": "3.0/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "UpdateFile",
+  "alias": "Update",
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3DeleteFile",
+  "http": "DELETE",
+  "path": "3.0/files/{file_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "DeleteFile",
+  "alias": "Delete",
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3DownloadFile",
+  "http": "GET",
+  "path": "3.0/files/{file_id}/download",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "DownloadFile",
+  "alias": null,
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "bytes",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3PreviewFile",
+  "http": "GET",
+  "path": "3.0/files/{file_id}/preview",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "PreviewFile",
+  "alias": null,
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "bytes",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "v3ShowFile",
+  "http": "GET",
+  "path": "3.0/files/{file_id}/usage",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiFilesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiFilesEndpoint",
+  "method": "ShowFile",
+  "alias": null,
+  "pathParams": [
+   "fileId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "file"
+  ]
+ },
+ {
+  "operationId": "Permissions",
+  "http": "GET",
+  "path": "3.0/permissions",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPermissionsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPermissionsEndpoint",
+  "method": "Permissions",
+  "alias": null,
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "general"
+  ]
+ },
+ {
+  "operationId": "ListMilestones",
+  "http": "GET",
+  "path": "3.0/projects/{project_id}/milestones",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "ListMilestones",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "CreateMilestone",
+  "http": "POST",
+  "path": "3.0/projects/{project_id}/milestones",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "CreateMilestone",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "ShowMilestone",
+  "http": "GET",
+  "path": "3.0/projects/{project_id}/milestones/{milestone_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "ShowMilestone",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "milestoneId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "EditMilestone",
+  "http": "POST",
+  "path": "3.0/projects/{project_id}/milestones/{milestone_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "EditMilestone",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "milestoneId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteMilestone",
+  "http": "DELETE",
+  "path": "3.0/projects/{project_id}/milestones/{milestone_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "DeleteMilestone",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "milestoneId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "ListWorkPackages",
+  "http": "GET",
+  "path": "3.0/projects/{project_id}/packages",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "ListWorkPackages",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "CreateWorkPackage",
+  "http": "POST",
+  "path": "3.0/projects/{project_id}/packages",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "CreateWorkPackage",
+  "alias": null,
+  "pathParams": [
+   "projectId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "ShowWorkPackage",
+  "http": "GET",
+  "path": "3.0/projects/{project_id}/packages/{package_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "ShowWorkPackage",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "packageId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "project_show"
+  ]
+ },
+ {
+  "operationId": "EditWorkPackage",
+  "http": "PATCH",
+  "path": "3.0/projects/{project_id}/packages/{package_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "EditWorkPackage",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "packageId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "DeleteWorkPackage",
+  "http": "DELETE",
+  "path": "3.0/projects/{project_id}/packages/{package_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiProjectsEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiProjectsEndpoint",
+  "method": "DeleteWorkPackage",
+  "alias": null,
+  "pathParams": [
+   "projectId",
+   "packageId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "project_edit"
+  ]
+ },
+ {
+  "operationId": "v3PurchaseOrderList",
+  "http": "GET",
+  "path": "3.0/purchase_orders",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPurchaseOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPurchaseOrdersEndpoint",
+  "method": "PurchaseOrderList",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_article_order_show"
+  ]
+ },
+ {
+  "operationId": "v3PurchaseOrderCreate",
+  "http": "POST",
+  "path": "3.0/purchase_orders",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPurchaseOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPurchaseOrdersEndpoint",
+  "method": "PurchaseOrderCreate",
+  "alias": "Create",
+  "pathParams": [],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_article_order_edit"
+  ]
+ },
+ {
+  "operationId": "v3PurchaseOrderShow",
+  "http": "GET",
+  "path": "3.0/purchase_orders/{purchase_order_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPurchaseOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPurchaseOrdersEndpoint",
+  "method": "PurchaseOrderShow",
+  "alias": "GetById",
+  "pathParams": [
+   "purchaseOrderId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": [
+   "kb_article_order_show"
+  ]
+ },
+ {
+  "operationId": "v3PurchaseOrderUpdate",
+  "http": "PUT",
+  "path": "3.0/purchase_orders/{purchase_order_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPurchaseOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPurchaseOrdersEndpoint",
+  "method": "PurchaseOrderUpdate",
+  "alias": "Update",
+  "pathParams": [
+   "purchaseOrderId"
+  ],
+  "bodyKind": "json",
+  "returns": "model",
+  "scopes": [
+   "kb_article_order_edit"
+  ]
+ },
+ {
+  "operationId": "v3PurchaseOrderDelete",
+  "http": "DELETE",
+  "path": "3.0/purchase_orders/{purchase_order_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiPurchaseOrdersEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiPurchaseOrdersEndpoint",
+  "method": "PurchaseOrderDelete",
+  "alias": "Delete",
+  "pathParams": [
+   "purchaseOrderId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": [
+   "kb_article_order_edit"
+  ]
+ },
+ {
+  "operationId": "ListTaxes",
+  "http": "GET",
+  "path": "3.0/taxes",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiTaxesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiTaxesEndpoint",
+  "method": "ListTaxes",
+  "alias": "GetAll",
+  "pathParams": [],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "ShowTax",
+  "http": "GET",
+  "path": "3.0/taxes/{tax_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiTaxesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiTaxesEndpoint",
+  "method": "ShowTax",
+  "alias": "GetById",
+  "pathParams": [
+   "taxId"
+  ],
+  "bodyKind": null,
+  "returns": "model",
+  "scopes": []
+ },
+ {
+  "operationId": "DeleteTax",
+  "http": "DELETE",
+  "path": "3.0/taxes/{tax_id}",
+  "version": "3.0",
+  "interface": "bexio_lib.Interfaces.V3.IBexioApiTaxesEndpoint",
+  "class": "bexio_lib.Implementation.Endpoints.V3.BexioApiTaxesEndpoint",
+  "method": "DeleteTax",
+  "alias": "Delete",
+  "pathParams": [
+   "taxId"
+  ],
+  "bodyKind": null,
+  "returns": "bool",
+  "scopes": []
+ }
+]

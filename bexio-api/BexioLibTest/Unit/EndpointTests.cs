@@ -1,14 +1,12 @@
 using bexio_lib.Data;
 using bexio_lib.Implementation;
-using bexio_lib.Implementation.Endpoints;
-using bexio_lib.Implementation.Endpoints.V3;
 using bexio_lib.Interfaces;
 using bexio_lib.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,44 +15,43 @@ namespace BexioLibTest.Unit
     public class EndpointTests
     {
         private readonly FakeBexioApi _api = new FakeBexioApi();
+        private IBexioClient Client => new BexioClient(this._api);
 
         [Fact]
-        public void V2_resource_contains_version()
+        public void Versions_are_part_of_the_resource()
         {
-            this._api.Content = "[]";
-            new BexioApiContactEndpoint(this._api).GetAll();
+            this.Client.V2.Contacts.GetAll();
             Assert.Equal("2.0/contact", this._api.Resource);
             Assert.Equal(HttpMethod.Get, this._api.LastMethod);
-        }
 
-        [Fact]
-        public void V3_resource_contains_version()
-        {
-            this._api.Content = "[]";
-            new BexioApiCurrencyV3Endpoint(this._api).GetAll();
+            this.Client.V3.Currencies.GetAll();
             Assert.Equal("3.0/currencies", this._api.Resource);
-
-            this._api.Content = "{\"next_ref_nr\":\"MA-1\"}";
-            Assert.Equal("MA-1", new BexioApiManualEntryEndpoint(this._api).GetNextReferenceNumber());
-            Assert.Equal("3.0/accounting/manual_entries/next_ref_nr", this._api.Resource);
         }
 
         [Fact]
         public void GetAll_sets_query_parameters()
         {
-            this._api.Content = "[]";
-            new BexioApiContactEndpoint(this._api).GetAll(new BexioRequestFilter { limit = 10, offset = 20, order_by = new[] { "id_desc", "name" } });
+            this.Client.V2.Contacts.GetAll(new BexioRequestFilter { limit = 10, offset = 20, order_by = new[] { "id_desc", "name" } });
             Assert.Equal("10", this._api.Query("limit"));
             Assert.Equal("20", this._api.Query("offset"));
             Assert.Equal("id_desc,name", this._api.Query("order_by"));
         }
 
         [Fact]
+        public void Typed_query_parameters_are_sent_and_null_is_skipped()
+        {
+            this.Client.V2.Contacts.ListContacts(showArchived: true);
+            Assert.Equal("true", this._api.Query("show_archived"));
+
+            this.Client.V2.Contacts.ListContacts();
+            Assert.Null(this._api.Query("show_archived"));
+        }
+
+        [Fact]
         public void Search_posts_filters_as_array()
         {
-            this._api.Content = "[]";
-            var filter = new BexioRequestFilter().Add(new BexioRequestFilterInstruction(BexioInvoiceFilterFields.kb_item_status_id, "9,16", BexioFilterCriteria.IN));
-            new BexioApiInvoiceEndpoint(this._api).Search(filter);
+            var filter = new BexioRequestFilter().Add(new BexioRequestFilterInstruction(BexioSearchFields.KbInvoice.kb_item_status_id, "9,16", BexioFilterCriteria.IN));
+            this.Client.V2.Invoices.Search(filter);
             Assert.Equal("2.0/kb_invoice/search", this._api.Resource);
             Assert.Equal(HttpMethod.Post, this._api.LastMethod);
             Assert.Equal("[{\"field\":\"kb_item_status_id\",\"value\":\"9,16\",\"criteria\":\"in\"}]", this._api.Body);
@@ -63,8 +60,7 @@ namespace BexioLibTest.Unit
         [Fact]
         public void Search_without_filter_sends_empty_array()
         {
-            this._api.Content = "[]";
-            new BexioApiInvoiceEndpoint(this._api).Search();
+            this.Client.V2.Invoices.Search();
             Assert.Equal("[]", this._api.Body);
         }
 
@@ -72,7 +68,7 @@ namespace BexioLibTest.Unit
         public void Create_omits_null_properties()
         {
             this._api.Content = "{\"id\":5}";
-            var result = new BexioApiContactEndpoint(this._api).Create(new BexioContact { name_1 = "Muster", contact_type_id = 1 });
+            var result = this.Client.V2.Contacts.Create(new BexioContactRequest { name_1 = "Muster", contact_type_id = 1 });
             Assert.Equal(5, result.id);
             Assert.Equal(HttpMethod.Post, this._api.LastMethod);
             Assert.DoesNotContain("null", this._api.Body);
@@ -80,15 +76,15 @@ namespace BexioLibTest.Unit
         }
 
         [Fact]
-        public void Update_uses_post_in_v2_and_put_in_v3()
+        public void Update_uses_the_http_method_of_the_api_version()
         {
-            new BexioApiContactEndpoint(this._api).Update(7, new BexioContact { name_1 = "x" });
+            this.Client.V2.Contacts.Update(7, new BexioContactRequest { name_1 = "x" });
             Assert.Equal("2.0/contact/7", this._api.Resource);
             Assert.Equal(HttpMethod.Post, this._api.LastMethod);
 
-            new BexioApiCurrencyV3Endpoint(this._api).Update(7, new BexioCurrency { name = "CHF" });
+            this.Client.V3.Currencies.UpdateCurrency(7, new Newtonsoft.Json.Linq.JObject { ["name"] = "CHF" });
             Assert.Equal("3.0/currencies/7", this._api.Resource);
-            Assert.Equal(HttpMethod.Put, this._api.LastMethod);
+            Assert.Equal(HttpMethod.Patch, this._api.LastMethod);
         }
 
         [Theory]
@@ -99,36 +95,29 @@ namespace BexioLibTest.Unit
         {
             this._api.StatusCode = code;
             this._api.Content = content;
-            Assert.Equal(expected, new BexioApiContactEndpoint(this._api).Delete(3));
+            Assert.Equal(expected, this.Client.V2.Contacts.Delete(3));
             Assert.Equal(HttpMethod.Delete, this._api.LastMethod);
             Assert.Equal("2.0/contact/3", this._api.Resource);
         }
 
         [Fact]
-        public void Invoice_actions()
+        public void Invoice_actions_use_the_documented_paths()
         {
-            var invoices = new BexioApiInvoiceEndpoint(this._api);
-            invoices.Issue(1);
+            var invoices = this.Client.V2.Invoices;
+            invoices.IssueInvoice(1);
             Assert.Equal("2.0/kb_invoice/1/issue", this._api.Resource);
-            invoices.MarkSent(1);
+            invoices.MarkAsSentInvoice(1);
             Assert.Equal("2.0/kb_invoice/1/mark_as_sent", this._api.Resource);
-            invoices.Send(1, new BexioInvoiceSend { recipient_email = "a@b.ch" });
-            Assert.Equal("2.0/kb_invoice/1/send", this._api.Resource);
-            Assert.Contains("a@b.ch", this._api.Body);
+            invoices.RevertIssueInvoice(1);
+            Assert.Equal("2.0/kb_invoice/1/revert_issue", this._api.Resource);
+            invoices.ShowInvoicePDF(1, 5);
+            Assert.Equal("2.0/kb_invoice/1/pdf", this._api.Resource);
         }
 
         [Fact]
-        public void Order_creates_invoice_on_correct_url()
+        public void Document_type_is_a_path_parameter_of_positions()
         {
-            new BexioApiOrderEndpoint(this._api).CreateInvoice(4, new BexioOrderInvoiceUpdate());
-            Assert.Equal("2.0/kb_order/4/invoice", this._api.Resource);
-        }
-
-        [Fact]
-        public void Positions_use_snake_case_segment()
-        {
-            this._api.Content = "[]";
-            new BexioApiInvoicePositionEndpoint(this._api).GetAll(9, BexioPositionType.KbPositionCustom);
+            this.Client.V2.DefaultPositions.ListDefaultPositions("kb_invoice", 9);
             Assert.Equal("2.0/kb_invoice/9/kb_position_custom", this._api.Resource);
         }
 
@@ -137,7 +126,7 @@ namespace BexioLibTest.Unit
         {
             this._api.StatusCode = HttpStatusCode.NotFound;
             this._api.Content = "{\"error_code\":404,\"message\":\"Not found\"}";
-            var ex = Assert.Throws<BexioApiException>(() => new BexioApiContactEndpoint(this._api).GetById(1));
+            var ex = Assert.Throws<BexioApiException>(() => this.Client.V2.Contacts.GetById(1));
             Assert.Equal(HttpStatusCode.NotFound, ex.StatusCode);
             Assert.Contains("Not found", ex.Message);
         }
@@ -147,7 +136,7 @@ namespace BexioLibTest.Unit
         {
             this._api.StatusCode = HttpStatusCode.BadGateway;
             this._api.Content = "<html>bad gateway</html>";
-            var ex = Assert.Throws<BexioApiException>(() => new BexioApiContactEndpoint(this._api).GetById(1));
+            var ex = Assert.Throws<BexioApiException>(() => this.Client.V2.Contacts.GetById(1));
             Assert.Contains("bad gateway", ex.Message);
         }
 
@@ -155,7 +144,7 @@ namespace BexioLibTest.Unit
         public async Task Async_variants()
         {
             this._api.Content = "{\"id\":2}";
-            var contact = await new BexioApiContactEndpoint(this._api).GetByIdAsync(2);
+            var contact = await this.Client.V2.Contacts.GetByIdAsync(2);
             Assert.Equal(2, contact.id);
             Assert.Equal("2.0/contact/2", this._api.Resource);
         }
@@ -171,14 +160,13 @@ namespace BexioLibTest.Unit
         }
 
         [Fact]
-        public void Client_groups_endpoints_by_version()
+        public void Client_groups_endpoints_by_version_and_caches_them()
         {
             var client = new BexioClient(this._api);
-            this._api.Content = "[]";
             client.V2.Contacts.GetAll();
             Assert.Equal("2.0/contact", this._api.Resource);
-            client.V3.Currencies.GetAll();
-            Assert.Equal("3.0/currencies", this._api.Resource);
+            client.V3.Taxes.ListTaxes();
+            Assert.Equal("3.0/taxes", this._api.Resource);
             Assert.Same(client.V2.Contacts, client.V2.Contacts);
         }
 
@@ -190,7 +178,9 @@ namespace BexioLibTest.Unit
             var provider = services.BuildServiceProvider();
 
             var endpointInterfaces = typeof(IBexioApi).Assembly.GetTypes()
-                .Where(t => t.IsInterface && t.Name.StartsWith("IBexioApi") && t.Name.EndsWith("Endpoint") && !t.IsGenericType && t.Name != "IBexioApiEndpoint" && t.Name != "IBexioApiPositionEndpoint");
+                .Where(t => t.IsInterface && t.Name.StartsWith("IBexioApi") && t.Name.EndsWith("Endpoint") && !t.IsGenericType
+                            && t.Name != "IBexioApiEndpoint" && t.Name != "IBexioApiPositionEndpoint").ToList();
+            Assert.True(endpointInterfaces.Count >= 50);
             foreach (var i in endpointInterfaces)
             {
                 Assert.NotNull(provider.GetService(i));

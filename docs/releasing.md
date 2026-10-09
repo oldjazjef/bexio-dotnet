@@ -2,7 +2,7 @@
 
 ## CI
 
-`.github/workflows/ci.yml` runs on every push to main and every pull request: restore, build with warnings as errors, tests with coverage, `dotnet pack`. Test results, coverage and the `.nupkg` are uploaded as artifacts.
+`.github/workflows/ci.yml` runs on every push to main and every pull request: check that the generated code matches the OpenAPI description, restore, build with warnings as errors, tests with coverage, `dotnet pack`. Test results, coverage and the `.nupkg` are uploaded as artifacts.
 
 ## Publishing to NuGet
 

@@ -1,5 +1,4 @@
-using bexio_lib.Interfaces;
-using bexio_lib.Interfaces.V3;
+using bexio_lib.Implementation;
 using System;
 using Xunit;
 
@@ -13,36 +12,32 @@ namespace BexioLibTest.Integration
     {
         private static bool HasKey => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("bexioApiKey"));
 
-        private readonly IBexioApiOrderEndpoint _orders;
-        private readonly IBexioApiContactEndpoint _contacts;
-        private readonly IBexioApiCurrencyV3Endpoint _currencies;
+        private readonly IBexioClient _bexio;
 
-        public BexioApiIntegrationTest(IBexioApiOrderEndpoint orders, IBexioApiContactEndpoint contacts, IBexioApiCurrencyV3Endpoint currencies)
+        public BexioApiIntegrationTest(IBexioClient bexio)
         {
-            this._orders = orders;
-            this._contacts = contacts;
-            this._currencies = currencies;
+            this._bexio = bexio;
         }
 
         [Fact]
         public void V2_Orders_GetAll()
         {
             if (!HasKey) return;
-            Assert.Null(Record.Exception(() => this._orders.GetAll()));
+            Assert.Null(Record.Exception(() => this._bexio.V2.Orders.GetAll()));
         }
 
         [Fact]
         public void V2_Contacts_GetAll()
         {
             if (!HasKey) return;
-            Assert.Null(Record.Exception(() => this._contacts.GetAll()));
+            Assert.Null(Record.Exception(() => this._bexio.V2.Contacts.GetAll()));
         }
 
         [Fact]
         public void V3_Currencies_GetAll()
         {
             if (!HasKey) return;
-            Assert.Null(Record.Exception(() => this._currencies.GetAll()));
+            Assert.Null(Record.Exception(() => this._bexio.V3.Currencies.GetAll()));
         }
     }
 }
