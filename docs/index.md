@@ -1,6 +1,6 @@
 # bexio-dotnet documentation
 
-A .NET client for the [bexio](https://www.bexio.com) API (2.0, 3.0 and 4.0).
+A .NET client for the [bexio](https://www.bexio.com) API (2.0 and 3.0).
 
 | Guide | Content |
 |---|---|
@@ -19,7 +19,7 @@ Requirements: .NET 10 (LTS).
 
 ```
 IBexioClient                      entry point, one per bexio account
- ├─ V2 / V3 / V4                  endpoints grouped by api version
+ ├─ V2 / V3                        endpoints grouped by api version
  │   └─ Contacts, Invoices, ...   one endpoint per bexio resource
  └─ Api (IBexioApi)               transport: auth header, base url, retry
 ```

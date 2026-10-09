@@ -11,7 +11,6 @@ namespace bexio_lib.Implementation
         IBexioApi Api { get; }
         IBexioV2 V2 { get; }
         IBexioV3 V3 { get; }
-        IBexioV4 V4 { get; }
     }
 
     public class BexioClient : IBexioClient
@@ -21,12 +20,10 @@ namespace bexio_lib.Implementation
             this.Api = api;
             this.V2 = new BexioV2(api);
             this.V3 = new BexioV3(api);
-            this.V4 = new BexioV4(api);
         }
 
         public IBexioApi Api { get; }
         public IBexioV2 V2 { get; }
         public IBexioV3 V3 { get; }
-        public IBexioV4 V4 { get; }
     }
 }

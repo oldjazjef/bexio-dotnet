@@ -100,7 +100,7 @@ namespace bexio_lib.Implementation
         }
 
         /// <summary>
-        /// Registers every endpoint (v2, v3, v4) of this assembly under its interface, e.g.
+        /// Registers every endpoint (v2, v3) of this assembly under its interface, e.g.
         /// IBexioApiInvoiceEndpoint -> BexioApiInvoiceEndpoint
         /// </summary>
         public static IServiceCollection AddBexioEndpoints(this IServiceCollection services)
