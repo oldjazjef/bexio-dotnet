@@ -1,4 +1,5 @@
 using bexio_lib.Interfaces;
+using bexio_lib.OAuth;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -41,6 +42,45 @@ namespace bexio_lib.Implementation
                 o.BaseUrl = configuration["bexioApiUrl"] ?? o.BaseUrl;
                 o.AccessToken = configuration["bexioApiKey"];
             });
+        }
+
+        /// <summary>
+        /// Authenticates with OAuth2 as an app registered at bexio instead of a personal access token.
+        /// Call after <see cref="AddBexio(IServiceCollection, Action{BexioOptions})"/> (or without a token there).
+        /// Registers <see cref="IBexioOAuthClient"/>, <see cref="IBexioTokenProvider"/> and, if not registered yet, an
+        /// in-memory <see cref="IBexioTokenStore"/>: register your own store (database) before or after this call.
+        /// </summary>
+        public static IServiceCollection AddBexioOAuth(this IServiceCollection services, Action<BexioOAuthOptions> configure)
+        {
+            services.AddOptions<BexioOAuthOptions>().Configure(configure);
+            return services.AddBexioOAuthCore();
+        }
+
+        /// <summary>Binds <see cref="BexioOAuthOptions"/> from a configuration section, e.g. "BexioOAuth"</summary>
+        public static IServiceCollection AddBexioOAuth(this IServiceCollection services, IConfiguration section)
+        {
+            services.AddOptions<BexioOAuthOptions>().Bind(section);
+            return services.AddBexioOAuthCore();
+        }
+
+        private static IServiceCollection AddBexioOAuthCore(this IServiceCollection services)
+        {
+            services.AddHttpClient(BexioOAuthClient.HttpClientName);
+            services.TryAddSingleton(TimeProvider.System);
+            services.TryAddSingleton<IBexioTokenStore, InMemoryBexioTokenStore>();
+            services.TryAddTransient<IBexioOAuthClient>(sp => new BexioOAuthClient(
+                sp.GetRequiredService<IHttpClientFactory>().CreateClient(BexioOAuthClient.HttpClientName),
+                sp.GetRequiredService<IOptions<BexioOAuthOptions>>(),
+                sp.GetRequiredService<TimeProvider>()));
+            // singleton: the refresh lock must be shared by all requests
+            services.TryAddSingleton<IBexioTokenProvider>(sp => new BexioOAuthTokenProvider(
+                sp.GetRequiredService<IBexioOAuthClient>(),
+                sp.GetRequiredService<IBexioTokenStore>(),
+                sp.GetRequiredService<IOptions<BexioOAuthOptions>>().Value,
+                sp.GetRequiredService<TimeProvider>()));
+            services.AddOptions<BexioOptions>().Configure<IBexioTokenProvider>((options, provider) =>
+                options.AccessTokenProvider = provider.GetAccessTokenAsync);
+            return services;
         }
 
         private static IServiceCollection AddBexioCore(this IServiceCollection services)
