@@ -2,7 +2,7 @@ name: Release
 
 # Push a tag like v1.2.3 to publish version 1.2.3 to nuget.org and create a GitHub release.
 # Publishes with NuGet trusted publishing (OIDC): no long-lived API key is stored.
-# Setup: nuget.org -> Account -> Trusted Publishing -> add policy for this repo and workflow file "release.yml",
+# Setup: nuget.org -> Account -> Trusted Publishing -> add policy for this repo, workflow file "release.yml" and environment "production",
 # then set the repository variable NUGET_USER to your nuget.org profile name (not your email).
 on:
   push:
@@ -15,6 +15,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: production   # must match the environment of the nuget.org trusted publishing policy
     steps:
       - uses: actions/checkout@v4
 
